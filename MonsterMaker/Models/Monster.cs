@@ -6,6 +6,7 @@ namespace MonsterMaker.Models
     {
         [Key]
         public int MonsterId { get; set; }
+        [Required]
         public string MonsterName { get; set; }
         public virtual Body BodyType { get; set; }
         public virtual Head HeadType { get; set; }

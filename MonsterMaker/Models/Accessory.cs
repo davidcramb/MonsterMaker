@@ -5,6 +5,7 @@ namespace MonsterMaker.Models
     public class Accessory
     {
         [Key]
+        [Required]
         public int AccessoryId { get; set; }
         public string AccessoryType { get; set; }
         public string ImageURL { get; set; }

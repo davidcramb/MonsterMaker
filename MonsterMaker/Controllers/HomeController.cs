@@ -13,9 +13,9 @@ namespace MonsterMaker.Controllers
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult Create()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "Create a new Monster";
 
             return View();
         }

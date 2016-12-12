@@ -5,6 +5,7 @@ namespace MonsterMaker.Models
     public class Head
     {
         [Key]
+        [Required]
         public int HeadId { get; set; }
         public string HeadType { get; set; }
         public string ImageURL { get; set; }
