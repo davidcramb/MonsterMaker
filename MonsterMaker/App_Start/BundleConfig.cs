@@ -27,8 +27,8 @@ namespace MonsterMaker
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
             bundles.Add(new ScriptBundle("~/bundles/app").Include(
-                "~/Scripts/angular.js",
-                      "~/Scripts.app.js"));
+                      "~/Scripts/angular.js",
+                      "~/Scripts/app.js"));
         }
     }
 }
