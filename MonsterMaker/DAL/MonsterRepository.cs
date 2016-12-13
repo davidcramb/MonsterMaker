@@ -19,5 +19,6 @@ namespace MonsterMaker.DAL
             Context = new MonsterMakerContext();
         }
 
+
     }
 }

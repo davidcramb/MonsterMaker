@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Tweeter.DAL;
+using MonsterMaker.DAL;
 using Moq;
 using System.Data.Entity;
-using Tweeter.Models;
+using MonsterMaker.Models;
 using System.Collections.Generic;
 using System.Linq;
 
