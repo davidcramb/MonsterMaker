@@ -6,7 +6,7 @@ using System.Web;
 
 namespace MonsterMaker.Models
 {
-    public class User
+    public class Maker
     {
         [Key]
         public int UserId { get; set; }

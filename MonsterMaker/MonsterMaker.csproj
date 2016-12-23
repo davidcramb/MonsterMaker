@@ -179,12 +179,14 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CreateController.cs" />
+    <Compile Include="Controllers\MonsterDetailController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="DAL\MonsterRepository.cs" />
-    <Compile Include="Migrations\201612130033569_InitialCreate.cs" />
-    <Compile Include="Migrations\201612130033569_InitialCreate.Designer.cs">
-      <DependentUpon>201612130033569_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201612170259599_InitialCreate.cs" />
+    <Compile Include="Migrations\201612170259599_InitialCreate.Designer.cs">
+      <DependentUpon>201612170259599_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Arm.cs" />
@@ -204,6 +206,7 @@
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModel\MonsterPartsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="..\packages\PhantomJS.2.1.1\tools\phantomjs\phantomjs.exe">
@@ -282,7 +285,7 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Home\Create.cshtml" />
+    <Content Include="Views\Create\Create.cshtml" />
     <Content Include="Views\Create\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -294,8 +297,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201612130033569_InitialCreate.resx">
-      <DependentUpon>201612130033569_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201612170259599_InitialCreate.resx">
+      <DependentUpon>201612170259599_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

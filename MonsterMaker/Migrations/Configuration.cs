@@ -15,8 +15,8 @@ namespace MonsterMaker.Migrations
 
         protected override void Seed(MonsterMaker.MonsterMakerContext context)
         {
-            User Bob = new User { UserId = 1, UserName = "Bob" };
-            User Joe = new User { UserId = 2, UserName = "Joe" };
+            Maker Bob = new Maker { UserId = 1, UserName = "Bob" };
+            Maker Joe = new Maker { UserId = 2, UserName = "Joe" };
 
             Body body01 = new Body { BodyId = 1, BodyType = "Tall", ImageURL = "http://localhost:49263/images/body01.png", StatBonus = 1 };
             Head head01 = new Head { HeadId = 1, HeadType = "Round", ImageURL = "http://localhost:49263/images/head01.png", StatBonus = 1 };
@@ -24,7 +24,7 @@ namespace MonsterMaker.Migrations
             Leg leg01 = new Leg { LegId = 1, LegType = "Thin", ImageURL = "http://localhost:49263/images/leg01.png", StatBonus = 1 };
             Accessory accessory01 = new Accessory { AccessoryId = 1, AccessoryType = "Star", ImageURL = "http://localhost:49263/images/accessory01.png", StatBonus = 2 };
 
-            context.Users.AddOrUpdate(
+            context.Makers.AddOrUpdate(
                 Bob,
                 Joe);
                 

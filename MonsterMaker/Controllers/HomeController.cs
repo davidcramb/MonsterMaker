@@ -17,7 +17,7 @@ namespace MonsterMaker.Controllers
         {
             ViewBag.Message = "Create a new Monster";
 
-            return View();
+            return RedirectToAction("Create");
         }
 
         public ActionResult Contact()

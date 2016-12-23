@@ -1,0 +1,74 @@
+﻿@*@model MonsterMaker.Models.Monster*@
+@model MonsterMaker.ViewModel.CreateMonsterViewModel
+
+<div class="container" ng-controller="MonsterCreateCtrl">
+   <div id="monsterPartsList">
+       <div class="dropdown">
+           <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Select Body
+           <span class="carat"></span>
+           </button>
+           <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+               @foreach (var body in ViewBag.Bodies)
+               {
+                   <li ng-click=(DrawBodyType(@body.BodyId))><a href="#">@body.BodyType</a></li>
+               }
+           </ul>
+       </div>
+       <div class="dropdown">
+           <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+               Select Head
+               <span class="carat"></span>
+           </button>
+           <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+               @foreach (var head in ViewBag.Heads)
+               {
+                   <li ng-click=(DrawHeadType(@head.HeadId))><a href="#">@head.HeadType</a></li>
+               }
+           </ul>
+       </div>
+       <div class="dropdown">
+           <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+               Select Arms
+               <span class="carat"></span>
+           </button>
+           <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+               @foreach (var arm in ViewBag.Arms)
+               {
+                   <li ng-click=(DrawArmType(@arm.ArmId))><a href="#">@arm.ArmType</a></li>
+               }
+           </ul>
+       </div>
+       <div class="dropdown">
+           <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+               Select Legs
+               <span class="carat"></span>
+           </button>
+           <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+               @foreach (var leg in ViewBag.Legs)
+               {
+                   <li ng-click=(DrawLegType(@leg.LegId))><a href="#">@leg.LegType</a></li>
+               }
+           </ul>
+       </div>
+       <div class="dropdown">
+           <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+               Select Accessories
+               <span class="carat"></span>
+           </button>
+           <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+               @foreach (var accessory in ViewBag.Accessories)
+               {
+                   <li ng-click=(DrawAccessoryType(@accessory.AccessoryId))><a href="#">@accessory.AccessoryType</a></li>
+               }
+           </ul>
+       </div>
+   </div>
+</div>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

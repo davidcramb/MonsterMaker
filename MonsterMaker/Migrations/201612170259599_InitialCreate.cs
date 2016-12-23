@@ -34,8 +34,65 @@ namespace MonsterMaker.Migrations
                 c => new
                     {
                         BattleId = c.Int(nullable: false, identity: true),
+                        Monster1_MonsterId = c.Int(),
+                        Monster2_MonsterId = c.Int(),
+                        User1_UserId = c.Int(),
+                        User2_UserId = c.Int(),
+                        Winner_MonsterId = c.Int(),
                     })
-                .PrimaryKey(t => t.BattleId);
+                .PrimaryKey(t => t.BattleId)
+                .ForeignKey("dbo.Monsters", t => t.Monster1_MonsterId)
+                .ForeignKey("dbo.Monsters", t => t.Monster2_MonsterId)
+                .ForeignKey("dbo.Makers", t => t.User1_UserId)
+                .ForeignKey("dbo.Makers", t => t.User2_UserId)
+                .ForeignKey("dbo.Monsters", t => t.Winner_MonsterId)
+                .Index(t => t.Monster1_MonsterId)
+                .Index(t => t.Monster2_MonsterId)
+                .Index(t => t.User1_UserId)
+                .Index(t => t.User2_UserId)
+                .Index(t => t.Winner_MonsterId);
+            
+            CreateTable(
+                "dbo.Monsters",
+                c => new
+                    {
+                        MonsterId = c.Int(nullable: false, identity: true),
+                        MonsterName = c.String(nullable: false),
+                        AccessoryId_AccessoryId = c.Int(),
+                        AccessoryType_AccessoryId = c.Int(),
+                        ArmId_ArmId = c.Int(),
+                        ArmType_ArmId = c.Int(),
+                        BodyId_BodyId = c.Int(),
+                        BodyType_BodyId = c.Int(),
+                        HeadId_HeadId = c.Int(),
+                        HeadType_HeadId = c.Int(),
+                        LegId_LegId = c.Int(),
+                        LegType_LegId = c.Int(),
+                        UserId_UserId = c.Int(),
+                    })
+                .PrimaryKey(t => t.MonsterId)
+                .ForeignKey("dbo.Accessories", t => t.AccessoryId_AccessoryId)
+                .ForeignKey("dbo.Accessories", t => t.AccessoryType_AccessoryId)
+                .ForeignKey("dbo.Arms", t => t.ArmId_ArmId)
+                .ForeignKey("dbo.Arms", t => t.ArmType_ArmId)
+                .ForeignKey("dbo.Bodies", t => t.BodyId_BodyId)
+                .ForeignKey("dbo.Bodies", t => t.BodyType_BodyId)
+                .ForeignKey("dbo.Heads", t => t.HeadId_HeadId)
+                .ForeignKey("dbo.Heads", t => t.HeadType_HeadId)
+                .ForeignKey("dbo.Legs", t => t.LegId_LegId)
+                .ForeignKey("dbo.Legs", t => t.LegType_LegId)
+                .ForeignKey("dbo.Makers", t => t.UserId_UserId)
+                .Index(t => t.AccessoryId_AccessoryId)
+                .Index(t => t.AccessoryType_AccessoryId)
+                .Index(t => t.ArmId_ArmId)
+                .Index(t => t.ArmType_ArmId)
+                .Index(t => t.BodyId_BodyId)
+                .Index(t => t.BodyType_BodyId)
+                .Index(t => t.HeadId_HeadId)
+                .Index(t => t.HeadType_HeadId)
+                .Index(t => t.LegId_LegId)
+                .Index(t => t.LegType_LegId)
+                .Index(t => t.UserId_UserId);
             
             CreateTable(
                 "dbo.Bodies",
@@ -71,49 +128,7 @@ namespace MonsterMaker.Migrations
                 .PrimaryKey(t => t.LegId);
             
             CreateTable(
-                "dbo.Monsters",
-                c => new
-                    {
-                        MonsterId = c.Int(nullable: false, identity: true),
-                        MonsterName = c.String(nullable: false),
-                        AccessoryId_AccessoryId = c.Int(),
-                        AccessoryType_AccessoryId = c.Int(),
-                        ArmId_ArmId = c.Int(),
-                        ArmType_ArmId = c.Int(),
-                        BodyId_BodyId = c.Int(),
-                        BodyType_BodyId = c.Int(),
-                        HeadId_HeadId = c.Int(),
-                        HeadType_HeadId = c.Int(),
-                        LegId_LegId = c.Int(),
-                        LegType_LegId = c.Int(),
-                        UserId_UserId = c.Int(),
-                    })
-                .PrimaryKey(t => t.MonsterId)
-                .ForeignKey("dbo.Accessories", t => t.AccessoryId_AccessoryId)
-                .ForeignKey("dbo.Accessories", t => t.AccessoryType_AccessoryId)
-                .ForeignKey("dbo.Arms", t => t.ArmId_ArmId)
-                .ForeignKey("dbo.Arms", t => t.ArmType_ArmId)
-                .ForeignKey("dbo.Bodies", t => t.BodyId_BodyId)
-                .ForeignKey("dbo.Bodies", t => t.BodyType_BodyId)
-                .ForeignKey("dbo.Heads", t => t.HeadId_HeadId)
-                .ForeignKey("dbo.Heads", t => t.HeadType_HeadId)
-                .ForeignKey("dbo.Legs", t => t.LegId_LegId)
-                .ForeignKey("dbo.Legs", t => t.LegType_LegId)
-                .ForeignKey("dbo.Users", t => t.UserId_UserId)
-                .Index(t => t.AccessoryId_AccessoryId)
-                .Index(t => t.AccessoryType_AccessoryId)
-                .Index(t => t.ArmId_ArmId)
-                .Index(t => t.ArmType_ArmId)
-                .Index(t => t.BodyId_BodyId)
-                .Index(t => t.BodyType_BodyId)
-                .Index(t => t.HeadId_HeadId)
-                .Index(t => t.HeadType_HeadId)
-                .Index(t => t.LegId_LegId)
-                .Index(t => t.LegType_LegId)
-                .Index(t => t.UserId_UserId);
-            
-            CreateTable(
-                "dbo.Users",
+                "dbo.Makers",
                 c => new
                     {
                         UserId = c.Int(nullable: false, identity: true),
@@ -197,7 +212,12 @@ namespace MonsterMaker.Migrations
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
-            DropForeignKey("dbo.Monsters", "UserId_UserId", "dbo.Users");
+            DropForeignKey("dbo.BattleLogs", "Winner_MonsterId", "dbo.Monsters");
+            DropForeignKey("dbo.BattleLogs", "User2_UserId", "dbo.Makers");
+            DropForeignKey("dbo.BattleLogs", "User1_UserId", "dbo.Makers");
+            DropForeignKey("dbo.BattleLogs", "Monster2_MonsterId", "dbo.Monsters");
+            DropForeignKey("dbo.BattleLogs", "Monster1_MonsterId", "dbo.Monsters");
+            DropForeignKey("dbo.Monsters", "UserId_UserId", "dbo.Makers");
             DropForeignKey("dbo.Monsters", "LegType_LegId", "dbo.Legs");
             DropForeignKey("dbo.Monsters", "LegId_LegId", "dbo.Legs");
             DropForeignKey("dbo.Monsters", "HeadType_HeadId", "dbo.Heads");
@@ -225,16 +245,21 @@ namespace MonsterMaker.Migrations
             DropIndex("dbo.Monsters", new[] { "ArmId_ArmId" });
             DropIndex("dbo.Monsters", new[] { "AccessoryType_AccessoryId" });
             DropIndex("dbo.Monsters", new[] { "AccessoryId_AccessoryId" });
+            DropIndex("dbo.BattleLogs", new[] { "Winner_MonsterId" });
+            DropIndex("dbo.BattleLogs", new[] { "User2_UserId" });
+            DropIndex("dbo.BattleLogs", new[] { "User1_UserId" });
+            DropIndex("dbo.BattleLogs", new[] { "Monster2_MonsterId" });
+            DropIndex("dbo.BattleLogs", new[] { "Monster1_MonsterId" });
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetRoles");
-            DropTable("dbo.Users");
-            DropTable("dbo.Monsters");
+            DropTable("dbo.Makers");
             DropTable("dbo.Legs");
             DropTable("dbo.Heads");
             DropTable("dbo.Bodies");
+            DropTable("dbo.Monsters");
             DropTable("dbo.BattleLogs");
             DropTable("dbo.Arms");
             DropTable("dbo.Accessories");

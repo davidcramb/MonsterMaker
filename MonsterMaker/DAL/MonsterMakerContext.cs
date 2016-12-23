@@ -9,7 +9,7 @@ namespace MonsterMaker
 {
     public class MonsterMakerContext : ApplicationDbContext
     {
-        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Maker> Makers { get; set; }
         public virtual DbSet<Monster> Monsters { get; set; }
         public virtual DbSet<Body> BodyType { get; set; }
         public virtual DbSet<Arm> Arms { get; set; }

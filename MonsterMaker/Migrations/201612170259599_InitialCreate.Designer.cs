@@ -13,7 +13,7 @@ namespace MonsterMaker.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201612130033569_InitialCreate"; }
+            get { return "201612170259599_InitialCreate"; }
         }
         
         string IMigrationMetadata.Source
