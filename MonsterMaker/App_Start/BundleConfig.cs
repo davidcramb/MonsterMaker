@@ -29,6 +29,8 @@ namespace MonsterMaker
             bundles.Add(new ScriptBundle("~/bundles/app").Include(
                       "~/Scripts/angular.js",
                       "~/Scripts/app.js"));
+            bundles.Add(new ScriptBundle("~/bundles/canvas").Include(
+                      "~/Scripts/fabric.js"));
         }
     }
 }

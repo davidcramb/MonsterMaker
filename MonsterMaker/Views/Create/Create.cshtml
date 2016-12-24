@@ -10,7 +10,7 @@
            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                @foreach (var body in ViewBag.Bodies)
                {
-                   <li ng-click=(DrawBodyType(@body.BodyId))><a href="#">@body.BodyType</a></li>
+                   <li ng-click=(GetBodyType(@body.BodyId))><a href="#">@body.BodyType</a></li>
                }
            </ul>
        </div>
@@ -63,6 +63,9 @@
            </ul>
        </div>
    </div>
+    <div id="canvas_container">
+        <canvas id="c"></canvas>
+    </div>
 </div>
 
 <div>
@@ -71,4 +74,6 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/canvas")
+    @Scripts.Render("~/bundles/app")
 }

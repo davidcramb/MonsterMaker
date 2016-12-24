@@ -1,14 +1,45 @@
-﻿var app = angular.module("MonsterMaker", []);
+﻿angular.module("fabric", [])
+//.factory('fabric', function ($window) {
+//    if ($window.moment) {
+//        $window._thirdParty = $window._thirdParty || {};
+//        $window._thirdParty.fabric = $window.fabric;
+//        try { delete $window.fabric; } catch (e) { $window.moment = undefined }
+//    }
+//    var fabric = $window._thirdParty.fabric;
+//    return fabric;
+//});
 
+
+//angular.module('app').factory('myBadService', [function () {
+//    try {
+//        fabric();
+//    }
+//    catch (e) {
+//        console.log('fabric is not available globally! Globals bad. ' +
+//          'You have to inject it');
+//    }
+//}]);
+
+
+var app = angular.module("MonsterMaker", ["fabric"]);
 app.controller("MonsterCreateCtrl", function ($scope, $http) {
-    $scope.welcome = "hi";
 
-    $scope.DrawBodyType = (id) => {
+    $scope.welcome = "hi";
+    var canvas = document.getElementById('c');
+    var ctx = canvas.getContext('2d');
+    $scope.GetBodyType = (id) => {
         $http.get("api/MonsterDetail/Body/"+id).success(function (response) {
-            console.log(response);
+            var bodyImage = response.ImageURL;
+            console.log(bodyImage);
+            $scope.DrawBody(bodyImage);
         }).error(function (error) {
             console.log(error);
         });
+    }
+    $scope.DrawBody = (bodyimage) => {
+        var image = new Image();
+        image.src = bodyimage;
+        ctx.drawImage(image, 50, 50);
     }
     $scope.DrawHeadType = (id) => {
         $http.get("api/MonsterDetail/Head/" + id).success(function (response) {
@@ -39,3 +70,4 @@ app.controller("MonsterCreateCtrl", function ($scope, $http) {
         });
     }
 })
+
