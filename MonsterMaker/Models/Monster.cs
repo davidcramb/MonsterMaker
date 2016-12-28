@@ -18,7 +18,7 @@ namespace MonsterMaker.Models
         public virtual Leg LegId { get; set; }
         public virtual Accessory AccessoryType { get; set; }
         public virtual Accessory AccessoryId { get; set; }
-
+        public virtual string monsterJSONData { get; set; }
         //public int Stats {get;set;}
         //public virtual List Battles
         //[Required]

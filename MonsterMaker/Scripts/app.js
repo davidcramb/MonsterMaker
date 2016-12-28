@@ -28,39 +28,12 @@ app.controller("MonsterCreateCtrl", function ($scope, $http) {
     //var ctx = canvas.getContext('2d');
     var canvas = new fabric.Canvas('c');
    
-
-
     $scope.GetBodyType = (id) => {
         $http.get("api/MonsterDetail/Body/" + id).success(function (response) {
             var bodyImage = response.ImageURL;
             $scope.DrawBody(bodyImage);
         }).error(function (error) {
             console.log(error);
-        });
-    };
-    $scope.DrawBody = (bodyImage) => {
-        fabric.Image.fromURL(bodyImage, function (oImg) {
-            canvas.add(oImg);
-        });
-    };
-    $scope.DrawHead = (headImage) => {
-        fabric.Image.fromURL(headImage, function (oImg) {
-            canvas.add(oImg);
-        });
-    };
-    $scope.DrawArms = (armImage) => {
-        fabric.Image.fromURL(armImage, function (oImg) {
-            canvas.add(oImg);
-        });
-    };
-    $scope.DrawLegs = (legImage) => {
-        fabric.Image.fromURL(legImage, function (oImg) {
-            canvas.add(oImg);
-        });
-    };
-    $scope.DrawAccessory = (accessoryImage) => {
-        fabric.Image.fromURL(accessoryImage, function (oImg) {
-            canvas.add(oImg);
         });
     };
     $scope.GetHeadType = (id) => {
@@ -98,6 +71,40 @@ app.controller("MonsterCreateCtrl", function ($scope, $http) {
         }).error(function (error) {
             console.log(error);
         });
+    };
+
+    $scope.DrawBody = (bodyImage) => {
+        fabric.Image.fromURL(bodyImage, function (oImg) {
+            canvas.add(oImg.set({
+                hasControls:false
+            }));
+            canvas.centerObject(oImg);
+        });
+    };
+    $scope.DrawHead = (headImage) => {
+        fabric.Image.fromURL(headImage, function (oImg) {
+            canvas.add(oImg);
+        });
+    };
+    $scope.DrawArms = (armImage) => {
+        fabric.Image.fromURL(armImage, function (oImg) {
+            canvas.add(oImg);
+        });
+    };
+    $scope.DrawLegs = (legImage) => {
+        fabric.Image.fromURL(legImage, function (oImg) {
+            canvas.add(oImg);
+        });
+    };
+    $scope.DrawAccessory = (accessoryImage) => {
+        fabric.Image.fromURL(accessoryImage, function (oImg) {
+            canvas.add(oImg);
+        });
+    };
+    $scope.SaveMonster = () => {
+        var data = canvas.toJSON();
+        console.log(data);
+        $http.post("/api/Monsters/", data);
     }
 })
 

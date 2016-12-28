@@ -85,7 +85,7 @@ namespace MonsterMaker.DAL
         }
 
         //Just in case this is necessary...
-        public void AddNewMonster(string name, int userId, int bodyId, int headId, int armsId, int legsId, int accessoryId)
+        public void AddNewMonster(string name, int userId, int bodyId, int headId, int armsId, int legsId, int accessoryId, string fabricJSONData)
         {
             Body body = Context.BodyType.FirstOrDefault(b => b.BodyId == bodyId);
             Head head = Context.Heads.FirstOrDefault(h => h.HeadId == headId);
@@ -93,7 +93,7 @@ namespace MonsterMaker.DAL
             Leg leg = Context.Legs.FirstOrDefault(l => l.LegId == legsId);
             Accessory accessory = Context.Accessory.FirstOrDefault(e => e.AccessoryId == accessoryId);
             Maker maker = Context.Makers.FirstOrDefault(m => m.UserId == userId);
-            Monster newMonster = new Models.Monster { MonsterName = name, UserId = maker, BodyId = body, HeadId = head, ArmId = arm, LegId = leg, AccessoryId = accessory };
+            Monster newMonster = new Models.Monster { MonsterName = name, UserId = maker, BodyId = body, HeadId = head, ArmId = arm, LegId = leg, AccessoryId = accessory, monsterJSONData = fabricJSONData };
             Context.Monsters.Add(newMonster);
             Context.SaveChanges();
         }

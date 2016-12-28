@@ -39,20 +39,7 @@ namespace MonsterMaker.Controllers
 
 
         // POST: Create/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+ 
 
         // GET: Create/Edit/5
         public ActionResult Edit(int id)

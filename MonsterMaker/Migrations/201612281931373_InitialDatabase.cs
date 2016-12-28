@@ -3,7 +3,7 @@ namespace MonsterMaker.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialCreate : DbMigration
+    public partial class InitialDatabase : DbMigration
     {
         public override void Up()
         {

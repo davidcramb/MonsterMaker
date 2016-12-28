@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using MonsterMaker.DAL;
-using System.Data.Entity.Validation;
 using MonsterMaker.Models;
+using System.Web.Http.Results;
 
 namespace MonsterMaker.Controllers
 {
@@ -51,6 +52,31 @@ namespace MonsterMaker.Controllers
         //}
 
         // POST: api/Create
+        [HttpPost]
+        public void Create([FromBody]Monster monsterParts)
+        {
+            try
+            {
+                // TODO: Add insert logic here
+                Monster newMonster = new Models.Monster
+                {
+                    BodyId = monsterParts.BodyId,
+                    BodyType = monsterParts.BodyType,
+                    HeadId = monsterParts.HeadId,
+                    HeadType = monsterParts.HeadType,
+                    ArmId = monsterParts.ArmId,
+                    ArmType = monsterParts.ArmType,
+                    LegId = monsterParts.LegId,
+                    LegType = monsterParts.LegType,
+                    AccessoryId = monsterParts.AccessoryId,
+                    AccessoryType = monsterParts.AccessoryType,
+                    monsterJSONData = monsterParts.monsterJSONData
+                };
+            }
+            catch
+            {
+            }
+        }
         public void Post([FromBody]string value)
         {
         }
