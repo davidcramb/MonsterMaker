@@ -27,9 +27,7 @@ app.controller("MonsterCreateCtrl", function ($scope, $http) {
     //var canvas = document.getElementById('c');
     //var ctx = canvas.getContext('2d');
     var canvas = new fabric.Canvas('c');
-    fabric.Image.fromURL('http://localhost:49263/images/body01.png', function (oImg) {
-        canvas.add(oImg);
-    })
+   
 
 
     $scope.GetBodyType = (id) => {
@@ -41,49 +39,29 @@ app.controller("MonsterCreateCtrl", function ($scope, $http) {
         });
     };
     $scope.DrawBody = (bodyImage) => {
-
-        //var image = new Image();
-        //image.src = bodyImage;
-        //image.onload = function () {
-        //    ctx.drawImage(image, 50, 50);
-        fabric.Image.fromURL(bodyImage, function(oImg){
+        fabric.Image.fromURL(bodyImage, function (oImg) {
             canvas.add(oImg);
-        })
-        };
-        
-
+        });
     };
     $scope.DrawHead = (headImage) => {
-        var image = new Image();
-        image.src = headImage;
-        image.onload = function () {
-            ctx.drawImage(image, 50, 20);
-
-        };
+        fabric.Image.fromURL(headImage, function (oImg) {
+            canvas.add(oImg);
+        });
     };
     $scope.DrawArms = (armImage) => {
-        var image = new Image();
-        image.src = armImage;
-        image.onload = function () {
-            ctx.drawImage(image, 10, 50);
-            ctx.drawImage(image, 30, 50);
-        };
+        fabric.Image.fromURL(armImage, function (oImg) {
+            canvas.add(oImg);
+        });
     };
     $scope.DrawLegs = (legImage) => {
-        var image = new Image();
-        image.src = legImage;
-        image.onload = function () {
-            cx.drawImage(image, 10, 80);
-            ctx.drawImage(image, 30, 80);
-        };
-        
+        fabric.Image.fromURL(legImage, function (oImg) {
+            canvas.add(oImg);
+        });
     };
     $scope.DrawAccessory = (accessoryImage) => {
-        var image = new Image();
-        image.src = accessoryImage;
-        image.onload = function () {
-            ctx.drawImage(image);
-        };
+        fabric.Image.fromURL(accessoryImage, function (oImg) {
+            canvas.add(oImg);
+        });
     };
     $scope.GetHeadType = (id) => {
         $http.get("api/MonsterDetail/Head/" + id).success(function (response) {
