@@ -22,7 +22,7 @@
            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                @foreach (var head in ViewBag.Heads)
                {
-                   <li ng-click=(DrawHeadType(@head.HeadId))><a href="#">@head.HeadType</a></li>
+                   <li ng-click=(GetHeadType(@head.HeadId))><a href="#">@head.HeadType</a></li>
                }
            </ul>
        </div>
@@ -34,7 +34,7 @@
            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                @foreach (var arm in ViewBag.Arms)
                {
-                   <li ng-click=(DrawArmType(@arm.ArmId))><a href="#">@arm.ArmType</a></li>
+                   <li ng-click=(GetArmType(@arm.ArmId))><a href="#">@arm.ArmType</a></li>
                }
            </ul>
        </div>
@@ -46,7 +46,7 @@
            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                @foreach (var leg in ViewBag.Legs)
                {
-                   <li ng-click=(DrawLegType(@leg.LegId))><a href="#">@leg.LegType</a></li>
+                   <li ng-click=(GetLegType(@leg.LegId))><a href="#">@leg.LegType</a></li>
                }
            </ul>
        </div>
@@ -58,13 +58,13 @@
            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                @foreach (var accessory in ViewBag.Accessories)
                {
-                   <li ng-click=(DrawAccessoryType(@accessory.AccessoryId))><a href="#">@accessory.AccessoryType</a></li>
+                   <li ng-click=(GetAccessoryType(@accessory.AccessoryId))><a href="#">@accessory.AccessoryType</a></li>
                }
            </ul>
        </div>
    </div>
     <div id="canvas_container">
-        <canvas id="c"></canvas>
+        <canvas id="c" width="600" height="600"></canvas>
     </div>
 </div>
 
@@ -74,6 +74,7 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-    @Scripts.Render("~/bundles/canvas")
+    @Scripts.Render("https://rawgit.com/kangax/fabric.js/master/dist/fabric.js")
     @Scripts.Render("~/bundles/app")
+
 }

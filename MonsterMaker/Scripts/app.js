@@ -24,46 +24,68 @@
 var app = angular.module("MonsterMaker", ["fabric"]);
 app.controller("MonsterCreateCtrl", function ($scope, $http) {
 
-    $scope.welcome = "hi";
-    var canvas = document.getElementById('c');
-    var ctx = canvas.getContext('2d');
+    //var canvas = document.getElementById('c');
+    //var ctx = canvas.getContext('2d');
+    var canvas = new fabric.Canvas('c');
+    fabric.Image.fromURL('http://localhost:49263/images/body01.png', function (oImg) {
+        canvas.add(oImg);
+    })
+
+
     $scope.GetBodyType = (id) => {
-        $http.get("api/MonsterDetail/Body/"+id).success(function (response) {
+        $http.get("api/MonsterDetail/Body/" + id).success(function (response) {
             var bodyImage = response.ImageURL;
-            console.log(bodyImage);
             $scope.DrawBody(bodyImage);
         }).error(function (error) {
             console.log(error);
         });
-    }
-    $scope.DrawBody = (bodyimage) => {
+    };
+    $scope.DrawBody = (bodyImage) => {
+
+        //var image = new Image();
+        //image.src = bodyImage;
+        //image.onload = function () {
+        //    ctx.drawImage(image, 50, 50);
+        fabric.Image.fromURL(bodyImage, function(oImg){
+            canvas.add(oImg);
+        })
+        };
+        
+
+    };
+    $scope.DrawHead = (headImage) => {
         var image = new Image();
-        image.src = bodyimage;
-        ctx.drawImage(image, 50, 50);
-    }
-    $scope.DrawHead = (headimage) => {
+        image.src = headImage;
+        image.onload = function () {
+            ctx.drawImage(image, 50, 20);
+
+        };
+    };
+    $scope.DrawArms = (armImage) => {
         var image = new Image();
-        image.src = headimage;
-        ctx.drawImage(image, 50, 20);
-    }
-    $scope.DrawArms = (armimage) => {
+        image.src = armImage;
+        image.onload = function () {
+            ctx.drawImage(image, 10, 50);
+            ctx.drawImage(image, 30, 50);
+        };
+    };
+    $scope.DrawLegs = (legImage) => {
         var image = new Image();
-        image.src = armimage;
-        ctx.drawImage(image, 10, 50);
-        ctx.drawImage(image, 30, 50);
-    }
-    $scope.DrawLegs = (legimage) => {
+        image.src = legImage;
+        image.onload = function () {
+            cx.drawImage(image, 10, 80);
+            ctx.drawImage(image, 30, 80);
+        };
+        
+    };
+    $scope.DrawAccessory = (accessoryImage) => {
         var image = new Image();
-        image.src = legimage;
-        cx.drawImage(image, 10, 80);
-        ctx.drawImage(image, 30, 80);
-    }
-    $scope.DrawExtra = (extraimage) => {
-        var image = new Image();
-        image.src = extraimage;
-        ctx.drawImage(image);
-    }
-    $scope.DrawHeadType = (id) => {
+        image.src = accessoryImage;
+        image.onload = function () {
+            ctx.drawImage(image);
+        };
+    };
+    $scope.GetHeadType = (id) => {
         $http.get("api/MonsterDetail/Head/" + id).success(function (response) {
             var headImage = response.ImageURL;
             $scope.DrawHead(headImage);
@@ -71,8 +93,8 @@ app.controller("MonsterCreateCtrl", function ($scope, $http) {
         }).error(function (error) {
             console.log(error);
         });
-    }
-    $scope.DrawArmType = (id) => {
+    };
+    $scope.GetArmType = (id) => {
         $http.get("api/MonsterDetail/Arm/" + id).success(function (response) {
             var armImage = response.ImageURL;
             $scope.DrawArms(armImage);
@@ -81,7 +103,7 @@ app.controller("MonsterCreateCtrl", function ($scope, $http) {
             console.log(error);
         });
     }
-    $scope.DrawLegType = (id) => {
+    $scope.GetLegType = (id) => {
         $http.get("api/MonsterDetail/Leg/" + id).success(function (response) {
             var legImage = response.ImageURL;
             $scope.DrawLegs(legImage);
@@ -90,10 +112,10 @@ app.controller("MonsterCreateCtrl", function ($scope, $http) {
             console.log(error)
         });
     }
-    $scope.DrawAccessoryType = (id) => {
+    $scope.GetAccessoryType = (id) => {
         $http.get("api/MonsterDetail/Accessory/" + id).success(function (response) {
-            var extraImage = response.ImageURL;
-            $scope.DrawExtra(extraImage);
+            var accessoryImage = response.ImageURL;
+            $scope.DrawAccessory(accessoryImage);
             console.log(response);
         }).error(function (error) {
             console.log(error);
