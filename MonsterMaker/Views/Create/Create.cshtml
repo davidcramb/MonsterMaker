@@ -62,6 +62,12 @@
                }
            </ul>
        </div>
+       <form class="form-inline">
+           <div class="form-group">
+               <label class="sr-only" for="monsterName">Monster Name</label>
+               <input type="text" ng-model="name" class="form-control" id="monsterName" placeholder="Name"/>
+           </div>
+       </form>
        <div class="btn btn-success" ng-click="SaveMonster()">Save Monster</div>
    </div>
     <div id="canvas_container">

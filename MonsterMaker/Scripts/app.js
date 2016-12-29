@@ -25,9 +25,7 @@ var app = angular.module("MonsterMaker", ["fabric"]);
 app.controller("MonsterCreateCtrl", function ($scope, $http) {
 
     var canvas = new fabric.Canvas('c');
-    var userMonster = {
-        MonsterName : "CrashTestDummy",
-    };
+    var userMonster = { };
    
     $scope.GetBodyType = (id) => {
         console.log(
@@ -109,12 +107,18 @@ app.controller("MonsterCreateCtrl", function ($scope, $http) {
             canvas.add(oImg);
         });
     };
+    
+
     $scope.SaveMonster = () => {
         var data = canvas.toJSON();
         console.log(data);
         userMonster.canvasData = JSON.stringify(data);
+        if ($scope.name == null) {
+            alert("Name your monster!");
+            return;
+        }
+        userMonster.monsterName = $scope.name;
         var monster = userMonster;
-        //var monster = JSON.stringify(userMonster);
         console.log(monster);
         $http.post("/MonsterDetail/Monsters", monster).success(function (response) {
             console.log(response)
