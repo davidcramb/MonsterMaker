@@ -3,7 +3,7 @@ namespace MonsterMaker.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialDatabase : DbMigration
+    public partial class _0 : DbMigration
     {
         public override void Up()
         {
@@ -58,40 +58,26 @@ namespace MonsterMaker.Migrations
                     {
                         MonsterId = c.Int(nullable: false, identity: true),
                         MonsterName = c.String(nullable: false),
-                        AccessoryId_AccessoryId = c.Int(),
-                        AccessoryType_AccessoryId = c.Int(),
-                        ArmId_ArmId = c.Int(),
-                        ArmType_ArmId = c.Int(),
-                        BodyId_BodyId = c.Int(),
-                        BodyType_BodyId = c.Int(),
-                        HeadId_HeadId = c.Int(),
-                        HeadType_HeadId = c.Int(),
-                        LegId_LegId = c.Int(),
-                        LegType_LegId = c.Int(),
+                        BodyId = c.Int(nullable: false),
+                        HeadId = c.Int(nullable: false),
+                        ArmId = c.Int(nullable: false),
+                        LegId = c.Int(nullable: false),
+                        AccessoryId = c.Int(nullable: false),
+                        canvasData = c.String(),
                         UserId_UserId = c.Int(),
                     })
                 .PrimaryKey(t => t.MonsterId)
-                .ForeignKey("dbo.Accessories", t => t.AccessoryId_AccessoryId)
-                .ForeignKey("dbo.Accessories", t => t.AccessoryType_AccessoryId)
-                .ForeignKey("dbo.Arms", t => t.ArmId_ArmId)
-                .ForeignKey("dbo.Arms", t => t.ArmType_ArmId)
-                .ForeignKey("dbo.Bodies", t => t.BodyId_BodyId)
-                .ForeignKey("dbo.Bodies", t => t.BodyType_BodyId)
-                .ForeignKey("dbo.Heads", t => t.HeadId_HeadId)
-                .ForeignKey("dbo.Heads", t => t.HeadType_HeadId)
-                .ForeignKey("dbo.Legs", t => t.LegId_LegId)
-                .ForeignKey("dbo.Legs", t => t.LegType_LegId)
+                .ForeignKey("dbo.Accessories", t => t.AccessoryId, cascadeDelete: true)
+                .ForeignKey("dbo.Arms", t => t.ArmId, cascadeDelete: true)
+                .ForeignKey("dbo.Bodies", t => t.BodyId, cascadeDelete: true)
+                .ForeignKey("dbo.Heads", t => t.HeadId, cascadeDelete: true)
+                .ForeignKey("dbo.Legs", t => t.LegId, cascadeDelete: true)
                 .ForeignKey("dbo.Makers", t => t.UserId_UserId)
-                .Index(t => t.AccessoryId_AccessoryId)
-                .Index(t => t.AccessoryType_AccessoryId)
-                .Index(t => t.ArmId_ArmId)
-                .Index(t => t.ArmType_ArmId)
-                .Index(t => t.BodyId_BodyId)
-                .Index(t => t.BodyType_BodyId)
-                .Index(t => t.HeadId_HeadId)
-                .Index(t => t.HeadType_HeadId)
-                .Index(t => t.LegId_LegId)
-                .Index(t => t.LegType_LegId)
+                .Index(t => t.BodyId)
+                .Index(t => t.HeadId)
+                .Index(t => t.ArmId)
+                .Index(t => t.LegId)
+                .Index(t => t.AccessoryId)
                 .Index(t => t.UserId_UserId);
             
             CreateTable(
@@ -218,16 +204,11 @@ namespace MonsterMaker.Migrations
             DropForeignKey("dbo.BattleLogs", "Monster2_MonsterId", "dbo.Monsters");
             DropForeignKey("dbo.BattleLogs", "Monster1_MonsterId", "dbo.Monsters");
             DropForeignKey("dbo.Monsters", "UserId_UserId", "dbo.Makers");
-            DropForeignKey("dbo.Monsters", "LegType_LegId", "dbo.Legs");
-            DropForeignKey("dbo.Monsters", "LegId_LegId", "dbo.Legs");
-            DropForeignKey("dbo.Monsters", "HeadType_HeadId", "dbo.Heads");
-            DropForeignKey("dbo.Monsters", "HeadId_HeadId", "dbo.Heads");
-            DropForeignKey("dbo.Monsters", "BodyType_BodyId", "dbo.Bodies");
-            DropForeignKey("dbo.Monsters", "BodyId_BodyId", "dbo.Bodies");
-            DropForeignKey("dbo.Monsters", "ArmType_ArmId", "dbo.Arms");
-            DropForeignKey("dbo.Monsters", "ArmId_ArmId", "dbo.Arms");
-            DropForeignKey("dbo.Monsters", "AccessoryType_AccessoryId", "dbo.Accessories");
-            DropForeignKey("dbo.Monsters", "AccessoryId_AccessoryId", "dbo.Accessories");
+            DropForeignKey("dbo.Monsters", "LegId", "dbo.Legs");
+            DropForeignKey("dbo.Monsters", "HeadId", "dbo.Heads");
+            DropForeignKey("dbo.Monsters", "BodyId", "dbo.Bodies");
+            DropForeignKey("dbo.Monsters", "ArmId", "dbo.Arms");
+            DropForeignKey("dbo.Monsters", "AccessoryId", "dbo.Accessories");
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
@@ -235,16 +216,11 @@ namespace MonsterMaker.Migrations
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropIndex("dbo.Monsters", new[] { "UserId_UserId" });
-            DropIndex("dbo.Monsters", new[] { "LegType_LegId" });
-            DropIndex("dbo.Monsters", new[] { "LegId_LegId" });
-            DropIndex("dbo.Monsters", new[] { "HeadType_HeadId" });
-            DropIndex("dbo.Monsters", new[] { "HeadId_HeadId" });
-            DropIndex("dbo.Monsters", new[] { "BodyType_BodyId" });
-            DropIndex("dbo.Monsters", new[] { "BodyId_BodyId" });
-            DropIndex("dbo.Monsters", new[] { "ArmType_ArmId" });
-            DropIndex("dbo.Monsters", new[] { "ArmId_ArmId" });
-            DropIndex("dbo.Monsters", new[] { "AccessoryType_AccessoryId" });
-            DropIndex("dbo.Monsters", new[] { "AccessoryId_AccessoryId" });
+            DropIndex("dbo.Monsters", new[] { "AccessoryId" });
+            DropIndex("dbo.Monsters", new[] { "LegId" });
+            DropIndex("dbo.Monsters", new[] { "ArmId" });
+            DropIndex("dbo.Monsters", new[] { "HeadId" });
+            DropIndex("dbo.Monsters", new[] { "BodyId" });
             DropIndex("dbo.BattleLogs", new[] { "Winner_MonsterId" });
             DropIndex("dbo.BattleLogs", new[] { "User2_UserId" });
             DropIndex("dbo.BattleLogs", new[] { "User1_UserId" });

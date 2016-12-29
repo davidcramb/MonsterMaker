@@ -15,10 +15,7 @@ namespace MonsterMaker.Controllers
     {
         // GET: api/Create
         MonsterRepository Repo = new MonsterRepository();
-        //public IEnumerable<string> GetAll()
-        //{
-                
-        //}
+       
         [Route("Create/api/MonsterDetail/body/{id}")]
         public Body GetBody(int id)
         {
@@ -53,25 +50,14 @@ namespace MonsterMaker.Controllers
 
         // POST: api/Create
         [HttpPost]
-        public void Create([FromBody]Monster monsterParts)
+        [Route("MonsterDetail/Monsters")]
+        public void CreateMonster([FromBody] TempMonster monster)
         {
+            int i = 0;
+            Monster newMonster = Repo.ConvertTempMonsterToMonster(monster);
             try
             {
-                // TODO: Add insert logic here
-                Monster newMonster = new Models.Monster
-                {
-                    BodyId = monsterParts.BodyId,
-                    BodyType = monsterParts.BodyType,
-                    HeadId = monsterParts.HeadId,
-                    HeadType = monsterParts.HeadType,
-                    ArmId = monsterParts.ArmId,
-                    ArmType = monsterParts.ArmType,
-                    LegId = monsterParts.LegId,
-                    LegType = monsterParts.LegType,
-                    AccessoryId = monsterParts.AccessoryId,
-                    AccessoryType = monsterParts.AccessoryType,
-                    monsterJSONData = monsterParts.monsterJSONData
-                };
+                Repo.AddNewMonster(newMonster);
             }
             catch
             {

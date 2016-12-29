@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MonsterMaker.Models
 {
@@ -8,17 +9,23 @@ namespace MonsterMaker.Models
         public int MonsterId { get; set; }
         [Required]
         public string MonsterName { get; set; }
+        public int BodyId { get; set; }
+        [ForeignKey("BodyId")]
         public virtual Body BodyType { get; set; }
-        public virtual Body BodyId { get; set; }
+        public int HeadId { get; set; }
+        [ForeignKey("HeadId")]
         public virtual Head HeadType { get; set; }
-        public virtual Head HeadId { get; set; }
+        public int ArmId { get; set; }
+        [ForeignKey("ArmId")]
         public virtual Arm ArmType { get; set; }
-        public virtual Arm ArmId { get; set; }
+        public int LegId { get; set; }
+        [ForeignKey("LegId")]
         public virtual Leg LegType { get; set; }
-        public virtual Leg LegId { get; set; }
+        public int AccessoryId { get; set; }
+        [ForeignKey("AccessoryId")]
         public virtual Accessory AccessoryType { get; set; }
-        public virtual Accessory AccessoryId { get; set; }
-        public virtual string monsterJSONData { get; set; }
+
+        public string canvasData { get; set; }
         //public int Stats {get;set;}
         //public virtual List Battles
         //[Required]

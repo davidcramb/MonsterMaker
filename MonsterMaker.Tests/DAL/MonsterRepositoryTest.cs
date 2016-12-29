@@ -72,8 +72,8 @@ namespace MonsterMaker.Tests.DAL
             Bob = new Maker { UserId = 1, UserName = "Bob" };
             Joe = new Maker { UserId = 1, UserName = "Joe" };
 
-            BobsMonster = new Monster { MonsterId = 1, MonsterName = "Lunatic", UserId = Bob, BodyId = body01, HeadId = head01, ArmId = arm01, LegId = leg01, AccessoryId = accessory01 };
-            JoesMonster = new Monster { MonsterId = 1, MonsterName = "Fringe", UserId = Bob, BodyId = body01, HeadId = head01, ArmId = arm01, LegId = leg01, AccessoryId = accessory01 };
+            BobsMonster = new Monster { MonsterId = 1, MonsterName = "Lunatic", UserId = Bob };
+            JoesMonster = new Monster { MonsterId = 1, MonsterName = "Fringe", UserId = Bob };
             makers.Add(Bob); makers.Add(Joe);
             monsters.Add(BobsMonster); monsters.Add(JoesMonster);
             ConnectToDataStore();
@@ -120,7 +120,7 @@ namespace MonsterMaker.Tests.DAL
         public void EnsureCanAddNewMonster()
         {
             Assert.IsTrue(repo.GetMonsters().Count() == 2);
-            Monster Mash = new Monster { MonsterId = 3, MonsterName = "Mash", UserId = Bob, BodyId = body01, HeadId = head01, ArmId = arm01, LegId = leg01, AccessoryId = accessory01};
+            Monster Mash = new Monster { MonsterId = 3, MonsterName = "Mash", UserId = Bob};
             repo.AddNewMonster(Mash);
             int expected_count = 3;
             int actual_count = repo.GetMonsters().Count();

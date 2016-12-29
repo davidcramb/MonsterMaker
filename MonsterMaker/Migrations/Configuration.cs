@@ -39,11 +39,6 @@ namespace MonsterMaker.Migrations
             context.Accessory.AddOrUpdate(
                 accessory01);
 
-            context.Monsters.AddOrUpdate(
-                m => m.MonsterName,
-                new Monster { MonsterId = 1, MonsterName = "Lunatic", UserId = Bob, BodyId = body01, HeadId = head01, ArmId = arm01, LegId = leg01, AccessoryId = accessory01 },
-                new Monster { MonsterId = 2, MonsterName = "EvilTwin", UserId = Joe, BodyId = body01, HeadId = head01, ArmId = arm01, LegId = leg01, AccessoryId = accessory01 }
-                );
 
 
 
