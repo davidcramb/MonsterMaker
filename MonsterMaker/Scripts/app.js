@@ -25,10 +25,15 @@ var app = angular.module("MonsterMaker", ["fabric"]);
 app.controller("MonsterCreateCtrl", function ($scope, $http) {
 
     var canvas = new fabric.Canvas('c');
-    var userMonster = { };
+    var userMonster = {};
+    var canvasElements = {};
+    var checkIfCanvasObjectExists = (obj) => {
+        if (canvas.contains(obj)) {
+            canvas.remove(obj);
+        };
+    }
    
     $scope.GetBodyType = (id) => {
-        console.log(
         $http.get("api/MonsterDetail/Body/" + id).success(function (response) {
             var bodyImage = response.ImageURL;
             $scope.DrawBody(bodyImage);
@@ -36,7 +41,7 @@ app.controller("MonsterCreateCtrl", function ($scope, $http) {
             console.log(userMonster);
         }).error(function (error) {
             console.log(error);
-        }));
+        });
     };
     $scope.GetHeadType = (id) => {
         $http.get("api/MonsterDetail/Head/" + id).success(function (response) {
@@ -78,33 +83,61 @@ app.controller("MonsterCreateCtrl", function ($scope, $http) {
             console.log(error);
         });
     };
-
+    
     $scope.DrawBody = (bodyImage) => {
         fabric.Image.fromURL(bodyImage, function (oImg) {
+            checkIfCanvasObjectExists(canvasElements.body)
             canvas.add(oImg.set({
+                type: "body",
                 hasControls:false
             }));
             canvas.centerObject(oImg);
+            canvasElements.body = oImg;
+            console.log(canvasElements);
         });
     };
     $scope.DrawHead = (headImage) => {
         fabric.Image.fromURL(headImage, function (oImg) {
-            canvas.add(oImg);
+            checkIfCanvasObjectExists(canvasElements.head)
+
+            canvas.add(oImg.set({
+                type: "head"
+            }));
+            canvasElements.head = oImg;
         });
     };
     $scope.DrawArms = (armImage) => {
         fabric.Image.fromURL(armImage, function (oImg) {
-            canvas.add(oImg);
+            checkIfCanvasObjectExists(canvasElements.arm1)
+            checkIfCanvasObjectExists(canvasElements.arm2)
+
+            canvas.add(oImg.set({
+                type: "arm"
+            }));
+            canvasElements.arm1 = oImg;
+            canvasElements.arm2 = oImg;
         });
     };
     $scope.DrawLegs = (legImage) => {
         fabric.Image.fromURL(legImage, function (oImg) {
-            canvas.add(oImg);
+            checkIfCanvasObjectExists(canvasElements.leg1)
+            checkIfCanvasObjectExists(canvasElements.leg2)
+
+            canvas.add(oImg.set({
+                type: "leg"
+            }));
+            canvasElements.leg1 = oImg;
+            canvasElements.leg2 = oImg;
         });
     };
     $scope.DrawAccessory = (accessoryImage) => {
         fabric.Image.fromURL(accessoryImage, function (oImg) {
-            canvas.add(oImg);
+            checkIfCanvasObjectExists(canvasElements.accessory)
+
+            canvas.add(oImg.set({
+                type: "accessory"
+            }));
+            canvasElements.accessory = oImg;
         });
     };
     
