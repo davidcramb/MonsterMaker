@@ -150,15 +150,34 @@ app.controller("MonsterCreateCtrl", function ($scope, $http) {
         });
     };
     $scope.DrawLegs = (legImage) => {
+        var legGroup = new fabric.Group([]);
         fabric.Image.fromURL(legImage, function (oImg) {
-            checkIfCanvasObjectExists(canvasElements.leg1)
-            checkIfCanvasObjectExists(canvasElements.leg2)
-            canvas.add(oImg.set({
-                type: "leg"
-            }));
-            canvasElements.leg1 = oImg;
-            canvasElements.leg2 = oImg;
+            checkIfCanvasObjectExists(canvasElements.leftLeg)
+            var leftLeg = oImg;
+            leftLeg.set({
+                type: 'leftleg',
+                originX: 'right',
+                left: canvasElements.body.XY.bl.x,
+                top: canvasElements.body.XY.bl.y
+            });
+            canvasElements.leftLeg = leftLeg;
+            console.log(leftLeg);
+            canvas.add(leftLeg);
         });
+        fabric.Image.fromURL(legImage, function (oImg) {
+            checkIfCanvasObjectExists(canvasElements.rightLeg);
+            var rightLeg = oImg;
+            rightLeg.set({
+                type: 'rightleg',
+                originX: 'left',
+                left: canvasElements.body.XY.br.x,
+                top: canvasElements.body.XY.br.y
+            });
+            canvasElements.rightLeg = rightLeg;
+            console.log(rightLeg);
+            canvas.add(rightLeg);
+        });
+
     };
     $scope.DrawAccessory = (accessoryImage) => {
         fabric.Image.fromURL(accessoryImage, function (oImg) {
