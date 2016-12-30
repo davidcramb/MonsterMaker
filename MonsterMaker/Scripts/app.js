@@ -102,14 +102,12 @@ app.controller("MonsterCreateCtrl", function ($scope, $http) {
             });
             canvas.centerObject(oImg);
             canvasElements.body = oImg;
-            canvasElements.body.headCoordinates = canvasElements.body.calcCoords();
-            console.log(canvasElements.body);
-            console.log(canvasElements.body.headCoordinates)
+            canvasElements.body.XY = canvasElements.body.calcCoords();
             var testcircleleft = new fabric.Circle({ radius: 10, top: 125, left: 200 }); //delete
             var testcircleright = new fabric.Circle({ radius: 10, top: 125, left: 400 }) //delete
             canvas.add(oImg, testcircleleft, testcircleright);
-            console.log(canvasElements.body.headCoordinates.tl.x)
         });
+        console.log(canvasElements.body)
     };
     $scope.DrawHead = (headImage) => {
         fabric.Image.fromURL(headImage, function (oImg) {
@@ -117,20 +115,38 @@ app.controller("MonsterCreateCtrl", function ($scope, $http) {
             canvas.add(oImg.set({
                 type: 'head',
                 originX: 'center',
-                left: ((canvasElements.body.headCoordinates.tl.x + canvasElements.body.headCoordinates.tr.x) / 2 )
+                left: ((canvasElements.body.XY.tl.x + canvasElements.body.XY.tr.x) / 2 )
             }));
             canvasElements.head = oImg;
         });
     };
     $scope.DrawArms = (armImage) => {
+        var armGroup = new fabric.Group([]);
         fabric.Image.fromURL(armImage, function (oImg) {
-            checkIfCanvasObjectExists(canvasElements.arm1)
-            checkIfCanvasObjectExists(canvasElements.arm2)
-            canvas.add(oImg.set({
-                type: "arm"
-            }));
-            canvasElements.arm1 = oImg;
-            canvasElements.arm2 = oImg;
+            checkIfCanvasObjectExists(canvasElements.leftArm)
+            var leftArm = oImg;
+            leftArm.set({
+                type: 'leftarm',
+                originX: 'right',
+                left: canvasElements.body.XY.ml.x,
+                top: canvasElements.body.XY.ml.y
+            });
+            canvasElements.leftArm = leftArm;
+            console.log(leftArm);
+            canvas.add(leftArm);
+        });
+        fabric.Image.fromURL(armImage, function (oImg) {
+            checkIfCanvasObjectExists(canvasElements.rightArm);
+            var rightArm = oImg;
+            rightArm.set({
+                type: 'rightarm',
+                originX: 'left',
+                left: canvasElements.body.XY.mr.x,
+                top: canvasElements.body.XY.mr.y
+            });
+            canvasElements.rightArm = rightArm;
+            console.log(rightArm);
+            canvas.add(rightArm);
         });
     };
     $scope.DrawLegs = (legImage) => {
