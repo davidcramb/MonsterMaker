@@ -32,6 +32,7 @@ app.controller("MonsterCreateCtrl", function ($scope, $http) {
             canvas.remove(obj);
         };
     }
+
    
     $scope.GetBodyType = (id) => {
         $http.get("api/MonsterDetail/Body/" + id).success(function (response) {
@@ -87,21 +88,36 @@ app.controller("MonsterCreateCtrl", function ($scope, $http) {
     $scope.DrawBody = (bodyImage) => {
         fabric.Image.fromURL(bodyImage, function (oImg) {
             checkIfCanvasObjectExists(canvasElements.body)
-            canvas.add(oImg.set({
-                type: "body",
-                hasControls:false
-            }));
+            //canvas.add(oImg.set({
+            //    type: "body",
+            //    lockMovementX : true,
+            //    lockMovementY : true,
+            //    hasControls:false
+            //}));
+            oImg.set({
+                type: 'body',
+                lockMovementX: true,
+                lockMovementY: true,
+                hasControls: false
+            });
             canvas.centerObject(oImg);
             canvasElements.body = oImg;
-            console.log(canvasElements);
+            canvasElements.body.headCoordinates = canvasElements.body.calcCoords();
+            console.log(canvasElements.body);
+            console.log(canvasElements.body.headCoordinates)
+            var testcircleleft = new fabric.Circle({ radius: 10, top: 125, left: 200 }); //delete
+            var testcircleright = new fabric.Circle({ radius: 10, top: 125, left: 400 }) //delete
+            canvas.add(oImg, testcircleleft, testcircleright);
+            console.log(canvasElements.body.headCoordinates.tl.x)
         });
     };
     $scope.DrawHead = (headImage) => {
         fabric.Image.fromURL(headImage, function (oImg) {
             checkIfCanvasObjectExists(canvasElements.head)
-
             canvas.add(oImg.set({
-                type: "head"
+                type: 'head',
+                originX: 'center',
+                left: ((canvasElements.body.headCoordinates.tl.x + canvasElements.body.headCoordinates.tr.x) / 2 )
             }));
             canvasElements.head = oImg;
         });
@@ -110,7 +126,6 @@ app.controller("MonsterCreateCtrl", function ($scope, $http) {
         fabric.Image.fromURL(armImage, function (oImg) {
             checkIfCanvasObjectExists(canvasElements.arm1)
             checkIfCanvasObjectExists(canvasElements.arm2)
-
             canvas.add(oImg.set({
                 type: "arm"
             }));
@@ -122,7 +137,6 @@ app.controller("MonsterCreateCtrl", function ($scope, $http) {
         fabric.Image.fromURL(legImage, function (oImg) {
             checkIfCanvasObjectExists(canvasElements.leg1)
             checkIfCanvasObjectExists(canvasElements.leg2)
-
             canvas.add(oImg.set({
                 type: "leg"
             }));
@@ -133,7 +147,6 @@ app.controller("MonsterCreateCtrl", function ($scope, $http) {
     $scope.DrawAccessory = (accessoryImage) => {
         fabric.Image.fromURL(accessoryImage, function (oImg) {
             checkIfCanvasObjectExists(canvasElements.accessory)
-
             canvas.add(oImg.set({
                 type: "accessory"
             }));
