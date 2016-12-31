@@ -69,6 +69,12 @@ namespace MonsterMaker.DAL
             return Context.Monsters.ToList();
         }
 
+        public List<Monster> GetMonstersByUserId(int userId)
+        {
+            var queryResult = Context.Monsters.Where(u => u.UserId.UserId == userId);
+            return queryResult.ToList();
+        }
+
         public List<Body> GetBody()
         {
             return Context.BodyType.ToList();
@@ -149,6 +155,5 @@ namespace MonsterMaker.DAL
                 var error = e;
             }
         }
-
     }
 }

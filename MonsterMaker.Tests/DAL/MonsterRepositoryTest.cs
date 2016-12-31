@@ -70,10 +70,10 @@ namespace MonsterMaker.Tests.DAL
             accessory01 = new Accessory { AccessoryId = 1, AccessoryType = "Star", ImageURL = "http://localhost:49263/images/accessory01.png", StatBonus = 2 };
 
             Bob = new Maker { UserId = 1, UserName = "Bob" };
-            Joe = new Maker { UserId = 1, UserName = "Joe" };
+            Joe = new Maker { UserId = 2, UserName = "Joe" };
 
             BobsMonster = new Monster { MonsterId = 1, MonsterName = "Lunatic", UserId = Bob };
-            JoesMonster = new Monster { MonsterId = 1, MonsterName = "Fringe", UserId = Bob };
+            JoesMonster = new Monster { MonsterId = 2, MonsterName = "Fringe", UserId = Joe };
             makers.Add(Bob); makers.Add(Joe);
             monsters.Add(BobsMonster); monsters.Add(JoesMonster);
             ConnectToDataStore();
@@ -115,6 +115,14 @@ namespace MonsterMaker.Tests.DAL
             int expected_count = 2;
             int actual_count = repo.GetMonsters().Count();
             Assert.AreEqual(expected_count, actual_count);
+        }
+        [TestMethod]
+        public void EnsureCanGetMonstersFilteredByUserId()
+        {
+            List<Monster> expectedList = new List<Monster>();
+            expectedList.Add(BobsMonster);
+            List<Monster> actualList = repo.GetMonstersByUserId(1);
+            CollectionAssert.AreEqual(expectedList, actualList);
         }
         [TestMethod]
         public void EnsureCanAddNewMonster()

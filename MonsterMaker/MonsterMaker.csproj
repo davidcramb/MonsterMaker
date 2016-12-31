@@ -183,6 +183,7 @@
     <Compile Include="Controllers\MonsterDetailController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MyMonstersController.cs" />
     <Compile Include="DAL\MonsterRepository.cs" />
     <Compile Include="Migrations\201612291937540_0.cs" />
     <Compile Include="Migrations\201612291937540_0.Designer.cs">

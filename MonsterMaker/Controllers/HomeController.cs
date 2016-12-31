@@ -20,11 +20,10 @@ namespace MonsterMaker.Controllers
             return RedirectToAction("Create");
         }
 
-        public ActionResult Contact()
+        public ActionResult My_Monsters()
         {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            ViewBag.Message = "All my little monsters";
+            return RedirectToAction("MyMonsters");
         }
     }
 }
