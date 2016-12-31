@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.AspNet.Identity;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -21,15 +22,16 @@ namespace MonsterMaker.Controllers
         }
 
         // GET: api/MyMonsters/5
-        [Route("MyMonsters/api/MonsterList/User/{id}")]
-        public List<Monster> Get(int userId)
+        [Route("MyMonsters/api/MonsterList/user/{id}")]
+        public IEnumerable<Monster> GetId(int id)
         {
-            return Repo.GetMonstersByUserId(userId);
+
+            return Repo.GetMonstersByUserId(id);
         }
-        [Route("MyMonsters/api/MonsterList/Monster/{id}")]
-        public Monster GetMonster(int monsterId)
+        [Route("MyMonsters/api/MonsterList/monster/{id}")]
+        public Monster GetMonster(int id)
         {
-            return Repo.GetMonsterByMonsterId(monsterId);
+            return Repo.GetMonsterByMonsterId(id);
         }
 
         // PUT: api/MyMonsters/5

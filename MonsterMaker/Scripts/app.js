@@ -211,24 +211,19 @@ app.controller("MonsterCreateCtrl", function ($scope, $http) {
 });
 app.controller("MonsterListCtrl", function ($scope, $http) {
     var allMonsters;
-    //$scope.GetAllMonsters= () => {
-        $http.get("api/MonsterList/").success(function(response){
+    var currentUserMonsters;
+        $http.get("api/MonsterList/Monsters").success(function(response){
             allMonsters = response;
             console.log(allMonsters);
         }).error(function(error){
             console.log(error);
         });
-    //};
-    $scope.GetBodyType = (id) => {
-        $http.get("api/MonsterDetail/Body/" + id).success(function (response) {
-            var bodyImage = response.ImageURL;
-            $scope.DrawBody(bodyImage);
-            userMonster.BodyId = response.BodyId;
-            console.log(userMonster);
-        }).error(function (error) {
-            console.log(error);
+        $http.get("api/MonsterList/User/" + id).success(function (response) {
+            currentUserMonsters = response;
+            console.log("usermonsters = ", currentUserMonsters);
+        }).error(function(error){
+            console.log(error)
         });
-    };
 
 });
 
