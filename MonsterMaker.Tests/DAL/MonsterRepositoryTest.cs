@@ -125,6 +125,15 @@ namespace MonsterMaker.Tests.DAL
             CollectionAssert.AreEqual(expectedList, actualList);
         }
         [TestMethod]
+        public void EnsureCanGetSingleMonstersFilteredByMonsterId()
+        {
+            Monster expectedMonster = BobsMonster;
+            int BobMonsterId = 1;
+            Monster actualMonster = repo.GetMonsterByMonsterId(BobMonsterId);
+            Assert.AreEqual(expectedMonster, actualMonster);
+
+        }
+        [TestMethod]
         public void EnsureCanAddNewMonster()
         {
             Assert.IsTrue(repo.GetMonsters().Count() == 2);
@@ -138,10 +147,20 @@ namespace MonsterMaker.Tests.DAL
         public void EnsureCanDeleteMonster()
         {
             Assert.IsTrue(repo.GetMonsters().Count() == 2);
-            repo.DeleteMonster(BobsMonster);
+            repo.DeleteMonsterByObject(BobsMonster);
             int expected_count = 1;
             int actual_count = repo.GetMonsters().Count();
             Assert.AreEqual(expected_count, actual_count);
+        }
+        [TestMethod]
+        public void EnsureCanDeleteMonsterByMonsterId()
+        {
+            Assert.IsTrue(repo.GetMonsters().Count() == 2);
+            repo.DeleteMonsterByMonsterId(1);
+            int expected_count = 1;
+            int actual_count = repo.GetMonsters().Count();
+            Assert.AreEqual(expected_count, actual_count);
+
         }
         //[TestMethod]
         //public void EnsureCanAddNewMonsterWithPartIDs()

@@ -1,29 +1,4 @@
-﻿angular.module("fabric", [])
-//.factory('fabric', function ($window) {
-//    if ($window.moment) {
-//        $window._thirdParty = $window._thirdParty || {};
-//        $window._thirdParty.fabric = $window.fabric;
-//        try { delete $window.fabric; } catch (e) { $window.moment = undefined }
-//    }
-//    var fabric = $window._thirdParty.fabric;
-//    return fabric;
-//});
-
-
-//angular.module('app').factory('myBadService', [function () {
-//    try {
-//        fabric();
-//    }
-//    catch (e) {
-//        console.log('fabric is not available globally! Globals bad. ' +
-//          'You have to inject it');
-//    }
-//}]);
-
-
-var app = angular.module("MonsterMaker", ["fabric"]);
-
-app.controller("MonsterCreateCtrl", function ($scope, $http) {
+﻿app.controller("MonsterCreateCtrl", function ($scope, $http) {
 
     var canvas = new fabric.Canvas('c');
     var userMonster = {};
@@ -104,8 +79,8 @@ app.controller("MonsterCreateCtrl", function ($scope, $http) {
             canvas.centerObject(oImg);
             canvasElements.body = oImg;
             canvasElements.body.XY = canvasElements.body.calcCoords();
-            //var testcircleleft = new fabric.Circle({ radius: 10, top: 125, left: 200 }); //delete
-            //var testcircleright = new fabric.Circle({ radius: 10, top: 125, left: 400 }) //delete
+            var testcircleleft = new fabric.Circle({ radius: 10, top: 125, left: 200 }); //delete
+            var testcircleright = new fabric.Circle({ radius: 10, top: 125, left: 400 }) //delete
             canvas.add(oImg, testcircleleft, testcircleright);
         });
         console.log(canvasElements.body)
@@ -209,26 +184,3 @@ app.controller("MonsterCreateCtrl", function ($scope, $http) {
         });
     };
 });
-app.controller("MonsterListCtrl", function ($scope, $http) {
-    var allMonsters;
-    //$scope.GetAllMonsters= () => {
-        $http.get("api/MonsterList/").success(function(response){
-            allMonsters = response;
-            console.log(allMonsters);
-        }).error(function(error){
-            console.log(error);
-        });
-    //};
-    $scope.GetBodyType = (id) => {
-        $http.get("api/MonsterDetail/Body/" + id).success(function (response) {
-            var bodyImage = response.ImageURL;
-            $scope.DrawBody(bodyImage);
-            userMonster.BodyId = response.BodyId;
-            console.log(userMonster);
-        }).error(function (error) {
-            console.log(error);
-        });
-    };
-
-});
-

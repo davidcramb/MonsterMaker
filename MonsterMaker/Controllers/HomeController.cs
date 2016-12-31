@@ -24,6 +24,6 @@ namespace MonsterMaker.Controllers
         {
             ViewBag.Message = "All my little monsters";
             return RedirectToAction("MyMonsters");
-        }
+            }
     }
 }

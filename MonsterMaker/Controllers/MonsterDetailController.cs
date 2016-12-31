@@ -13,7 +13,6 @@ namespace MonsterMaker.Controllers
 {
     public class MonsterDetailController : ApiController
     {
-        // GET: api/Create
         MonsterRepository Repo = new MonsterRepository();
        
         [Route("Create/api/MonsterDetail/body/{id}")]

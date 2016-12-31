@@ -1,41 +1,89 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
-using MonsterMaker.DAL;
-using MonsterMaker.Models;
+using System.Web;
+using System.Web.Mvc;
+
 namespace MonsterMaker.Controllers
 {
-    public class MyMonstersController : ApiController
+    public class MyMonstersController : Controller
     {
-        MonsterRepository Repo = new MonsterRepository();
-        // GET: api/MyMonsters
-        public IEnumerable<Monster> Get()
+        // GET: MyMonsters
+        public ActionResult MyMonsters()
         {
-            return Repo.GetMonsters();
+            return View();
         }
 
-        // GET: api/MyMonsters/5
-        public string Get(int userId)
+        // GET: MyMonsters/Details/5
+        public ActionResult Details(int id)
         {
-            return "value";
+            return View();
         }
 
-        // POST: api/MyMonsters
-        public void Post([FromBody]string value)
+        // GET: MyMonsters/Create
+        public ActionResult Create()
         {
+            return View();
         }
 
-        // PUT: api/MyMonsters/5
-        public void Put(int id, [FromBody]string value)
+        // POST: MyMonsters/Create
+        [HttpPost]
+        public ActionResult Create(FormCollection collection)
         {
+            try
+            {
+                // TODO: Add insert logic here
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
         }
 
-        // DELETE: api/MyMonsters/5
-        public void Delete(int id)
+        // GET: MyMonsters/Edit/5
+        public ActionResult Edit(int id)
         {
+            return View();
+        }
+
+        // POST: MyMonsters/Edit/5
+        [HttpPost]
+        public ActionResult Edit(int id, FormCollection collection)
+        {
+            try
+            {
+                // TODO: Add update logic here
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        // GET: MyMonsters/Delete/5
+        public ActionResult Delete(int id)
+        {
+            return View();
+        }
+
+        // POST: MyMonsters/Delete/5
+        [HttpPost]
+        public ActionResult Delete(int id, FormCollection collection)
+        {
+            try
+            {
+                // TODO: Add delete logic here
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
         }
     }
 }

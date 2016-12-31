@@ -75,6 +75,12 @@ namespace MonsterMaker.DAL
             return queryResult.ToList();
         }
 
+        public Monster GetMonsterByMonsterId(int monsterId)
+        {
+            Monster foundMonster = Context.Monsters.FirstOrDefault(monster => monster.MonsterId == monsterId);
+            return foundMonster;
+        }
+
         public List<Body> GetBody()
         {
             return Context.BodyType.ToList();
@@ -143,9 +149,22 @@ namespace MonsterMaker.DAL
         }
 
 
-        public void DeleteMonster(Monster monsterToRemove)
+        public void DeleteMonsterByObject(Monster monsterToRemove)
         {
             Context.Monsters.Remove(monsterToRemove);
+            try
+            {
+                Context.SaveChanges();
+            }
+            catch (DbEntityValidationException e)
+            {
+                var error = e;
+            }
+        }
+        public void DeleteMonsterByMonsterId(int monsterId)
+        {
+            var monsterToDelete = Context.Monsters.FirstOrDefault(m => m.MonsterId == monsterId);
+            Context.Monsters.Remove(monsterToDelete);
             try
             {
                 Context.SaveChanges();
