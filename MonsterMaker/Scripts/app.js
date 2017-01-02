@@ -106,7 +106,7 @@ app.controller("MonsterCreateCtrl", function ($scope, $http) {
             canvasElements.body.XY = canvasElements.body.calcCoords();
             //var testcircleleft = new fabric.Circle({ radius: 10, top: 125, left: 200 }); //delete
             //var testcircleright = new fabric.Circle({ radius: 10, top: 125, left: 400 }) //delete
-            canvas.add(oImg, testcircleleft, testcircleright);
+            canvas.add(oImg);
         });
         console.log(canvasElements.body)
     };
@@ -210,6 +210,8 @@ app.controller("MonsterCreateCtrl", function ($scope, $http) {
     };
 });
 app.controller("MonsterListCtrl", function ($scope, $http) {
+    var canvas = new fabric.Canvas('c');
+    var canvasElements = {};
     $scope.allMonsters = [];
     $scope.currentUserMonsters = [];
     $scope.runUserGet = false;
@@ -222,23 +224,31 @@ app.controller("MonsterListCtrl", function ($scope, $http) {
         }).error(function (error) {
               console.log(error)
         });
-
-        $scope.getMyMonsters = (userId) => {
-            if (!$scope.runUserGet) {
-                $scope.running = true;
-                $http.get("api/MonsterList/User/" + userId).success(function (response) {
-                    currentUserMonsters = response;
-                    console.log(currentUserMonsters);
-                }).error(function (error) {
-                    console.log(error);
-                });
-                return $scope.currentUserMonsters;
-                console.log('boo')
-            };
-        };
-
-        
+    $http.get("api/MonsterList/User/" + $('#makerId').val()).success(function (response) {
+        $scope.currentUserMonsters = response;
+        console.log(response)
+        return $scope.currentUserMonsters
+    }).error(function (error) {
+        console.log(error)
+    });
     
-
+    $scope.viewUserMonster = (id) =>
+    {
+        let monsters = $scope.allMonsters;
+        for (let i = 0; i <= $scope.allMonsters.length; i++)
+        {
+            console.log(monsters[i].MonsterId)
+            //if (monsters[i].MonsterId == id)
+            //{
+            //    canvasElements = $scope.allMonsters[i].canvasData;
+            //}
+        }
+        drawMonsterToPage(canvasElements);
+    }
+    var drawMonsterToPage = (data) =>
+    {
+        canvas.loadFromJSON(data);
+    }
+    
 });
 
