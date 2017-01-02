@@ -215,7 +215,7 @@ app.controller("MonsterListCtrl", function ($scope, $http) {
     $scope.allMonsters = [];
     $scope.currentUserMonsters = [];
     $scope.runUserGet = false;
-
+    barg = $scope.allMonsters;
     
     $http.get("api/MonsterList/Monsters/").success(function (response) {
         $scope.allMonsters = response;
@@ -235,13 +235,14 @@ app.controller("MonsterListCtrl", function ($scope, $http) {
     $scope.viewUserMonster = (id) =>
     {
         let monsters = $scope.allMonsters;
+        let poop = id;
         for (let i = 0; i <= $scope.allMonsters.length; i++)
         {
             console.log(monsters[i].MonsterId)
-            //if (monsters[i].MonsterId == id)
-            //{
-            //    canvasElements = $scope.allMonsters[i].canvasData;
-            //}
+            if (monsters[i].MonsterId == poop)
+            {
+                canvasElements = $scope.allMonsters[i].canvasData;
+            }
         }
         drawMonsterToPage(canvasElements);
     }
@@ -251,4 +252,6 @@ app.controller("MonsterListCtrl", function ($scope, $http) {
     }
     
 });
+
+var barg;
 
