@@ -12,10 +12,22 @@ namespace MonsterMaker.Controllers
 {
     public class CreateController : Controller
     {
+        protected ApplicationDbContext ApplicationDbContext {get;set;}
         // GET: Create
         public ActionResult Create()
         {
+        
+            this.ApplicationDbContext = new ApplicationDbContext();
+            if (ModelState.IsValid)
+            {
+                ViewBag.IsAuthed = true;
+            }
+            else
+            {
+                ViewBag.IsAuthed = false;
+            }
             MonsterRepository repo = new MonsterRepository();
+            Maker maker = new Maker();
             var vModel = new CreateMonsterViewModel();
             vModel.Body = repo.GetBody();
             vModel.Head = repo.GetHead();
@@ -27,6 +39,7 @@ namespace MonsterMaker.Controllers
             ViewBag.Arms = vModel.Arm;
             ViewBag.Legs = vModel.Leg;
             ViewBag.Accessories = vModel.Accessory;
+            ViewBag.UserId = maker.UserId;
             return View(vModel);
 
         }

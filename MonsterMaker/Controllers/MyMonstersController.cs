@@ -3,14 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using MonsterMaker.Models;
+using MonsterMaker.DAL;
+using Microsoft.AspNet.Identity;
 
 namespace MonsterMaker.Controllers
 {
     public class MyMonstersController : Controller
     {
+        MonsterRepository repo = new MonsterRepository();
         // GET: MyMonsters
         public ActionResult MyMonsters()
         {
+            string user_name = User.Identity.Name;
+            Maker found_maker = repo.GetUser(user_name);
+            ViewBag.userId = found_maker.UserId;
             return View();
         }
 

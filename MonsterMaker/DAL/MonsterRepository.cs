@@ -25,6 +25,15 @@ namespace MonsterMaker.DAL
             return Context.Makers.ToList();
         }
 
+        public Maker GetUser(int id)
+        {
+            return Context.Makers.FirstOrDefault(u => u.UserId == id);
+        }
+        public Maker GetUser(string name)
+        {
+            return Context.Makers.FirstOrDefault(u => u.UserName == name);
+        }
+
         public void AddUser(Maker user)
         {
             Context.Makers.Add(user);

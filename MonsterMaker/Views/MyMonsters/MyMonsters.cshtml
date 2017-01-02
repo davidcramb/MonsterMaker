@@ -1,8 +1,43 @@
-﻿<div ng-controller="MonsterListCtrl">
-    <div>
-
+﻿@{ 
+    var userId = ViewBag.UserId;
+}
+<div ng-controller="MonsterListCtrl">
+    <div class="container">
+        @*<div id="myMonsters" ng-repeat="myMonster in getMyMonsters(@userId)">
+            <h2>My Monsters</h2>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Monster Id</th>
+                        <th>Monster Name</th>
+                        <th>Maker</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <th scope="row">{{myMonster.MonsterId}}</th>
+                    <td>{{myMonster.MonsterName}}</td>
+                    <td>{{myMonster.User.UserName}}</td>
+                </tbody>
+            </table>
+        </div>*@
+        <div id="allMonsters">
+            <h2>All Monsters</h2>
+            <table class="table table-hover" ng-repeat="monster in allMonsters">
+                <thead>
+                    <tr>
+                        <th>Monster Id</th>
+                        <th>Monster Name</th>
+                        <th>Maker</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <th scope="row">{{monster.MonsterId}}</th>
+                    <td>{{monster.MonsterName}}</td>
+                    <td>{{monster.UserId.UserName}}</td>
+                </tbody>
+            </table>
+        </div>
     </div>
-
 </div>
 
 @section Scripts {

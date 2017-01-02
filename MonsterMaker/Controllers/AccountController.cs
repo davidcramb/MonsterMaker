@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using MonsterMaker.Models;
+using MonsterMaker.DAL;
 
 namespace MonsterMaker.Controllers
 {
@@ -151,12 +152,16 @@ namespace MonsterMaker.Controllers
         {
             if (ModelState.IsValid)
             {
+                
+                MonsterRepository repo = new MonsterRepository();
+                Maker maker = new Maker();
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                maker.UserName = user.UserName;
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+                    repo.AddUser(maker);
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);

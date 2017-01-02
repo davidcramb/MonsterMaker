@@ -210,20 +210,35 @@ app.controller("MonsterCreateCtrl", function ($scope, $http) {
     };
 });
 app.controller("MonsterListCtrl", function ($scope, $http) {
-    var allMonsters;
-    var currentUserMonsters;
-        $http.get("api/MonsterList/Monsters").success(function(response){
-            allMonsters = response;
-            console.log(allMonsters);
-        }).error(function(error){
-            console.log(error);
+    $scope.allMonsters = [];
+    $scope.currentUserMonsters = [];
+    $scope.runUserGet = false;
+
+    
+    $http.get("api/MonsterList/Monsters/").success(function (response) {
+        $scope.allMonsters = response;
+        console.log(response)
+            return $scope.allMonsters
+        }).error(function (error) {
+              console.log(error)
         });
-        $http.get("api/MonsterList/User/" + id).success(function (response) {
-            currentUserMonsters = response;
-            console.log("usermonsters = ", currentUserMonsters);
-        }).error(function(error){
-            console.log(error)
-        });
+
+        $scope.getMyMonsters = (userId) => {
+            if (!$scope.runUserGet) {
+                $scope.running = true;
+                $http.get("api/MonsterList/User/" + userId).success(function (response) {
+                    currentUserMonsters = response;
+                    console.log(currentUserMonsters);
+                }).error(function (error) {
+                    console.log(error);
+                });
+                return $scope.currentUserMonsters;
+                console.log('boo')
+            };
+        };
+
+        
+    
 
 });
 
