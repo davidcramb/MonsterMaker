@@ -1,4 +1,10 @@
-﻿<input type="hidden" id="makerId" value="@ViewBag.UserId"/>
+﻿@{
+    if (ViewContext.HttpContext.User.Identity.IsAuthenticated)
+    {
+        ViewBag.IsAuthed = true;
+    }
+}
+<input type="hidden" id="makerId" value="@ViewBag.UserId"/>
 <div ng-controller="MonsterListCtrl">
     <div class="container">
         <div id="myMonsters">

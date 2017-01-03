@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 
 namespace MonsterMaker.Controllers
 {
+    [Authorize]
     public class MyMonstersController : Controller
     {
         MonsterRepository repo = new MonsterRepository();

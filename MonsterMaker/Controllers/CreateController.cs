@@ -10,6 +10,7 @@ using MonsterMaker.ViewModel;
 
 namespace MonsterMaker.Controllers
 {
+    [Authorize]
     public class CreateController : Controller
     {
         protected ApplicationDbContext ApplicationDbContext {get;set;}
