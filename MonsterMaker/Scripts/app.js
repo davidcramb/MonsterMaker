@@ -215,15 +215,14 @@ app.controller("MonsterListCtrl", function ($scope, $http) {
     $scope.allMonsters = [];
     $scope.currentUserMonsters = [];
     $scope.runUserGet = false;
-    barg = $scope.allMonsters;
     
     $http.get("api/MonsterList/Monsters/").success(function (response) {
         $scope.allMonsters = response;
         console.log(response)
-            return $scope.allMonsters
-        }).error(function (error) {
-              console.log(error)
-        });
+        return $scope.allMonsters
+    }).error(function (error) {
+        console.log(error)
+    });
     $http.get("api/MonsterList/User/" + $('#makerId').val()).success(function (response) {
         $scope.currentUserMonsters = response;
         console.log(response)
@@ -231,27 +230,24 @@ app.controller("MonsterListCtrl", function ($scope, $http) {
     }).error(function (error) {
         console.log(error)
     });
-    
-    $scope.viewUserMonster = (id) =>
-    {
-        let monsters = $scope.allMonsters;
-        let poop = id;
-        for (let i = 0; i <= $scope.allMonsters.length; i++)
-        {
-            console.log(monsters[i].MonsterId)
-            if (monsters[i].MonsterId == poop)
-            {
-                canvasElements = $scope.allMonsters[i].canvasData;
-            }
-        }
-        drawMonsterToPage(canvasElements);
-    }
-    var drawMonsterToPage = (data) =>
-    {
-        canvas.loadFromJSON(data);
-    }
-    
-});
 
-var barg;
+    $scope.viewUserMonster = (id) => {
+        let monsters = $scope.allMonsters;
+
+        for (let i = 0; i < monsters.length; i++) {
+            let currentMonster = monsters[i];
+            if (currentMonster.MonsterId === id) {
+                console.log(currentMonster.MonsterName);
+                canvasElements = currentMonster.canvasData;
+            };
+        };
+        drawMonsterToPage(canvasElements);
+    };
+
+    var drawMonsterToPage = (data) => {
+        console.log("draw", data);
+        canvas.loadFromJSON(data);
+        canvas.renderAll();
+    };
+});
 
