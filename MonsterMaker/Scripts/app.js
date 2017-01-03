@@ -96,7 +96,6 @@ app.controller("MonsterCreateCtrl", function ($scope, $http) {
             //    hasControls:false
             //}));
             oImg.set({
-                type: 'body',
                 lockMovementX: true,
                 lockMovementY: true,
                 hasControls: false
@@ -114,7 +113,6 @@ app.controller("MonsterCreateCtrl", function ($scope, $http) {
         fabric.Image.fromURL(headImage, function (oImg) {
             checkIfCanvasObjectExists(canvasElements.head)
             canvas.add(oImg.set({
-                type: 'head',
                 originX: 'center',
                 left: ((canvasElements.body.XY.tl.x + canvasElements.body.XY.tr.x) / 2)
             }));
@@ -127,7 +125,6 @@ app.controller("MonsterCreateCtrl", function ($scope, $http) {
             checkIfCanvasObjectExists(canvasElements.leftArm)
             var leftArm = oImg;
             leftArm.set({
-                type: 'leftarm',
                 originX: 'right',
                 left: canvasElements.body.XY.ml.x,
                 top: canvasElements.body.XY.ml.y
@@ -140,7 +137,6 @@ app.controller("MonsterCreateCtrl", function ($scope, $http) {
             checkIfCanvasObjectExists(canvasElements.rightArm);
             var rightArm = oImg;
             rightArm.set({
-                type: 'rightarm',
                 originX: 'left',
                 left: canvasElements.body.XY.mr.x,
                 top: canvasElements.body.XY.mr.y
@@ -156,7 +152,6 @@ app.controller("MonsterCreateCtrl", function ($scope, $http) {
             checkIfCanvasObjectExists(canvasElements.leftLeg)
             var leftLeg = oImg;
             leftLeg.set({
-                type: 'leftleg',
                 originX: 'right',
                 left: canvasElements.body.XY.bl.x,
                 top: canvasElements.body.XY.bl.y
@@ -169,7 +164,6 @@ app.controller("MonsterCreateCtrl", function ($scope, $http) {
             checkIfCanvasObjectExists(canvasElements.rightLeg);
             var rightLeg = oImg;
             rightLeg.set({
-                type: 'rightleg',
                 originX: 'left',
                 left: canvasElements.body.XY.br.x,
                 top: canvasElements.body.XY.br.y
@@ -184,7 +178,6 @@ app.controller("MonsterCreateCtrl", function ($scope, $http) {
         fabric.Image.fromURL(accessoryImage, function (oImg) {
             checkIfCanvasObjectExists(canvasElements.accessory)
             canvas.add(oImg.set({
-                type: "accessory"
             }));
             canvasElements.accessory = oImg;
         });
