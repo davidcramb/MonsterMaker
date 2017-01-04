@@ -1,6 +1,7 @@
 ﻿@*@model MonsterMaker.Models.Monster*@
 @model MonsterMaker.ViewModel.CreateMonsterViewModel
 
+<input type="hidden" id="makerId" value="@ViewBag.UserId" />
 <div class="container" ng-controller="MonsterCreateCtrl">
    <div id="monsterPartsList">
        <div class="dropdown">

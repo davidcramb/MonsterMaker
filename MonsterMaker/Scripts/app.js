@@ -193,6 +193,7 @@ app.controller("MonsterCreateCtrl", function ($scope, $http) {
             return;
         };
         userMonster.monsterName = $scope.name;
+        userMonster.MakerId = $('#makerId').val();
         var monster = userMonster;
         console.log(monster);
         $http.post("/MonsterDetail/Monsters", monster).success(function (response) {

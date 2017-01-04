@@ -64,7 +64,7 @@ namespace MonsterMaker.Migrations
                         LegId = c.Int(nullable: false),
                         AccessoryId = c.Int(nullable: false),
                         canvasData = c.String(),
-                        UserId_UserId = c.Int(),
+                        MakerId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.MonsterId)
                 .ForeignKey("dbo.Accessories", t => t.AccessoryId, cascadeDelete: true)
@@ -72,13 +72,13 @@ namespace MonsterMaker.Migrations
                 .ForeignKey("dbo.Bodies", t => t.BodyId, cascadeDelete: true)
                 .ForeignKey("dbo.Heads", t => t.HeadId, cascadeDelete: true)
                 .ForeignKey("dbo.Legs", t => t.LegId, cascadeDelete: true)
-                .ForeignKey("dbo.Makers", t => t.UserId_UserId)
+                .ForeignKey("dbo.Makers", t => t.MakerId, cascadeDelete: true)
                 .Index(t => t.BodyId)
                 .Index(t => t.HeadId)
                 .Index(t => t.ArmId)
                 .Index(t => t.LegId)
                 .Index(t => t.AccessoryId)
-                .Index(t => t.UserId_UserId);
+                .Index(t => t.MakerId);
             
             CreateTable(
                 "dbo.Bodies",
@@ -203,7 +203,7 @@ namespace MonsterMaker.Migrations
             DropForeignKey("dbo.BattleLogs", "User1_UserId", "dbo.Makers");
             DropForeignKey("dbo.BattleLogs", "Monster2_MonsterId", "dbo.Monsters");
             DropForeignKey("dbo.BattleLogs", "Monster1_MonsterId", "dbo.Monsters");
-            DropForeignKey("dbo.Monsters", "UserId_UserId", "dbo.Makers");
+            DropForeignKey("dbo.Monsters", "MakerId", "dbo.Makers");
             DropForeignKey("dbo.Monsters", "LegId", "dbo.Legs");
             DropForeignKey("dbo.Monsters", "HeadId", "dbo.Heads");
             DropForeignKey("dbo.Monsters", "BodyId", "dbo.Bodies");
@@ -215,7 +215,7 @@ namespace MonsterMaker.Migrations
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
-            DropIndex("dbo.Monsters", new[] { "UserId_UserId" });
+            DropIndex("dbo.Monsters", new[] { "MakerId" });
             DropIndex("dbo.Monsters", new[] { "AccessoryId" });
             DropIndex("dbo.Monsters", new[] { "LegId" });
             DropIndex("dbo.Monsters", new[] { "ArmId" });

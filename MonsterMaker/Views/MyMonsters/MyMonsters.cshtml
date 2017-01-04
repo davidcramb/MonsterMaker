@@ -20,7 +20,7 @@
                 <tbody ng-repeat="userMonster in currentUserMonsters">
                     <th scope="row">{{userMonster.MonsterId}}</th>
                     <td>{{userMonster.MonsterName}}</td>
-                    <td>{{userMonster.UserId.UserName}}</td>
+                    <td>{{userMonster.MakerName.UserName}}</td>
                     <td class="btn btn-info viewMonster" ng-click="viewUserMonster(userMonster.MonsterId)">View</td>
                     <td class="btn btn-danger">Delete</td>
                 </tbody>
@@ -39,7 +39,7 @@
                 <tbody ng-repeat="monster in allMonsters" id="{{monster.MonsterId}}">
                     <th scope="row">{{monster.MonsterId}}</th>
                     <td>{{monster.MonsterName}}</td>
-                    <td>{{monster.UserId.UserName}}</td>
+                    <td>{{monster.MakerName.UserName}}</td>
                     <td class="btn btn-info viewMonster" ng-click="viewUserMonster(monster.MonsterId)">View</td>
                     <td class="btn btn-default fightMonster">Fight</td>
                 </tbody>

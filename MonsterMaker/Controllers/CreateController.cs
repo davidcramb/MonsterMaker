@@ -28,6 +28,8 @@ namespace MonsterMaker.Controllers
                 ViewBag.IsAuthed = false;
             }
             MonsterRepository repo = new MonsterRepository();
+            string user_name = User.Identity.Name;
+            Maker found_maker = repo.GetUser(user_name);
             Maker maker = new Maker();
             var vModel = new CreateMonsterViewModel();
             vModel.Body = repo.GetBody();
@@ -35,12 +37,12 @@ namespace MonsterMaker.Controllers
             vModel.Arm = repo.GetArms();
             vModel.Leg = repo.GetLegs();
             vModel.Accessory = repo.GetAccessory();
+            ViewBag.UserId = found_maker.UserId;
             ViewBag.Bodies = vModel.Body;
             ViewBag.Heads = vModel.Head;
             ViewBag.Arms = vModel.Arm;
             ViewBag.Legs = vModel.Leg;
             ViewBag.Accessories = vModel.Accessory;
-            ViewBag.UserId = maker.UserId;
             return View(vModel);
 
         }

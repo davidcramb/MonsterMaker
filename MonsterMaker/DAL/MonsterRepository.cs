@@ -80,7 +80,7 @@ namespace MonsterMaker.DAL
 
         public List<Monster> GetMonstersByUserId(int userId)
         {
-            var queryResult = Context.Monsters.Where(u => u.UserId.UserId == userId);
+            var queryResult = Context.Monsters.Where(u => u.MakerId == userId);
             return queryResult.ToList();
         }
 
@@ -152,7 +152,8 @@ namespace MonsterMaker.DAL
             Arm newArm = GetArms(Int32.Parse(monster.ArmId));
             Leg newLeg = GetLegs(Int32.Parse(monster.LegId));
             Accessory newAccessory = GetAccessory(Int32.Parse(monster.AccessoryId));
-            Monster newMonster = new Models.Monster() {MonsterName = monsterName, BodyType = newBody, HeadType = newHead, ArmType = newArm, LegType = newLeg, AccessoryType = newAccessory, canvasData = canvas  };
+            Maker monsterMaker = GetUser(Int32.Parse(monster.MakerId));
+            Monster newMonster = new Models.Monster() {MonsterName = monsterName, BodyType = newBody, HeadType = newHead, ArmType = newArm, LegType = newLeg, AccessoryType = newAccessory, MakerName = monsterMaker, canvasData = canvas  };
             Context.Monsters.Add(newMonster);
             return newMonster;
         }

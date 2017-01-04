@@ -29,6 +29,8 @@ namespace MonsterMaker.Models
         //public int Stats {get;set;}
         //public virtual List Battles
         //[Required]
-        public virtual Maker UserId { get; set; }
+        public int MakerId { get; set; }
+        [ForeignKey("MakerId")]
+        public virtual Maker MakerName { get; set; }
     }
 }
