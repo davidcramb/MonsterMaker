@@ -244,4 +244,8 @@ app.controller("MonsterListCtrl", function ($scope, $http) {
         canvas.renderAll();
     };
 });
+app.controller("BattleCtrl", function ($scope, $http) {
+    var p1Canvas = new fabric.Canvas('c1');
+    var p2Canvas = new fabric.Canvas('c2');
+});
 

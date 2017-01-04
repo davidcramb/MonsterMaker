@@ -12,6 +12,7 @@ namespace MonsterMaker.Controllers
     [Authorize]
     public class BattleController : Controller
     {
+        MonsterRepository repo = new MonsterRepository();
         // GET: Battle
         public ActionResult Index()
         {
