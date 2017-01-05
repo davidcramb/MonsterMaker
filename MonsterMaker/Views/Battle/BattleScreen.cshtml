@@ -8,10 +8,10 @@
                     Select Your Monster
                     <span class="carat"></span>
                 </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" ng-repeat="userMonster in currentUserMonsters">
-                    {
-                        <li ng-click="drawToP1CanvasArea(userMonster.MonsterId)"><a href="#">{{userMonster.MonsterName}}</a></li>
-                    }
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                    
+                        <li ng-repeat="userMonster in currentUserMonsters" ng-click="drawToP1CanvasArea(selected.value = $index)"><a href="#">{{userMonster.MonsterName}}</a></li>
+                    
                 </ul>
             </div>
         </div>
@@ -24,10 +24,10 @@
                     Select Another Monster
                     <span class="carat"></span>
                 </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" ng-repeat="monster in allOtherMonsters">
-                    {
-                    <li ng-click="drawToP2CanvasArea(monster.MonsterId)"><a href="#">{{monster.MonsterName}}</a></li>
-                    }
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" >
+                    
+                    <li ng-repeat="monster in allOtherMonsters" ng-click="drawToP2CanvasArea(selected.value = $index)"><a href="#">{{monster.MonsterName}}</a></li>
+                    
                 </ul>
             </div>
         </div>

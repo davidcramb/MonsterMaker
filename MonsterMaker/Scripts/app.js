@@ -261,26 +261,25 @@ app.controller("MonsterListCtrl", function ($scope, $http) {
 });
 
 app.controller("BattleCtrl", function ($scope, $http) {
-    console.log('hi');
+    var currentUserId = $('#makerId').val()
     var p1Canvas = new fabric.Canvas('c1');
     var p2Canvas = new fabric.Canvas('c2');
+    $scope.selected = { value: 0 };
+
     $scope.currentUserMonsters = [];
     $scope.allOtherMonsters = [];
 
     $scope.drawToP1CanvasArea = (id) =>
     {
-        let monster = $scope.allOtherMonsters[id];
-        console.log(monster);
+        let monster = $scope.currentUserMonsters[id];
     };
     $scope.drawToP2CanvasArea = (id) =>
     {
         let monster = $scope.allOtherMonsters[id];
-        console.log(monster);
     };
 
-    console.log($('#makerId').val());
 
-    $http.get("http://localhost:49263/MyMonsters/api/MonsterList/User/" + $('#makerId').val()).success(function (response) {
+    $http.get("http://localhost:49263/MyMonsters/api/MonsterList/User/" + currentUserId).success(function (response) {
         $scope.currentUserMonsters = response;
         console.log(response);
         return $scope.currentUserMonsters;
@@ -289,8 +288,8 @@ app.controller("BattleCtrl", function ($scope, $http) {
     });
 
     $http.get("http://localhost:49263/MyMonsters/api/MonsterList/Monsters/").success(function (response) {
-        $scope.allOtherMonsters = response;
         console.log(response);
+        $scope.allOtherMonsters = response;
         return $scope.allOtherMonsters;
     }).error(function (error) {
         console.log(error);

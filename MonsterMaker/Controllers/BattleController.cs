@@ -17,7 +17,9 @@ namespace MonsterMaker.Controllers
         // GET: Battle
         public ActionResult BattleScreen()
         {
-
+            string user_name = User.Identity.Name;
+            Maker found_maker = repo.GetUser(user_name);
+            ViewBag.userId = found_maker.UserId;
             return View();
         }
 
