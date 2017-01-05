@@ -98,11 +98,14 @@ app.controller("MonsterCreateCtrl", function ($scope, $http) {
             oImg.set({
                 lockMovementX: true,
                 lockMovementY: true,
-                hasControls: false
+                hasControls: false,
+                width: 200,
+                height: 350
             });
             canvas.centerObject(oImg);
             canvasElements.body = oImg;
             canvasElements.body.XY = canvasElements.body.calcCoords();
+            console.log(oImg);
             //var testcircleleft = new fabric.Circle({ radius: 10, top: 125, left: 200 }); //delete
             //var testcircleright = new fabric.Circle({ radius: 10, top: 125, left: 400 }) //delete
             canvas.add(oImg);
@@ -114,8 +117,11 @@ app.controller("MonsterCreateCtrl", function ($scope, $http) {
             checkIfCanvasObjectExists(canvasElements.head)
             canvas.add(oImg.set({
                 originX: 'center',
-                left: ((canvasElements.body.XY.tl.x + canvasElements.body.XY.tr.x) / 2)
+                left: ((canvasElements.body.XY.tl.x + canvasElements.body.XY.tr.x) / 2),
+                height: 200,
+                width: 150
             }));
+            console.log(oImg);
             canvasElements.head = oImg;
         });
     };
@@ -127,7 +133,9 @@ app.controller("MonsterCreateCtrl", function ($scope, $http) {
             leftArm.set({
                 originX: 'right',
                 left: canvasElements.body.XY.ml.x,
-                top: canvasElements.body.XY.ml.y
+                top: canvasElements.body.XY.ml.y,
+                width: 250,
+                height: 60
             });
             canvasElements.leftArm = leftArm;
             console.log(leftArm);
@@ -139,7 +147,9 @@ app.controller("MonsterCreateCtrl", function ($scope, $http) {
             rightArm.set({
                 originX: 'left',
                 left: canvasElements.body.XY.mr.x,
-                top: canvasElements.body.XY.mr.y
+                top: canvasElements.body.XY.mr.y,
+                width: 250,
+                height: 60
             });
             canvasElements.rightArm = rightArm;
             console.log(rightArm);
@@ -154,7 +164,9 @@ app.controller("MonsterCreateCtrl", function ($scope, $http) {
             leftLeg.set({
                 originX: 'right',
                 left: canvasElements.body.XY.bl.x,
-                top: canvasElements.body.XY.bl.y
+                top: canvasElements.body.XY.bl.y,
+                height: 230,
+                width: 70
             });
             canvasElements.leftLeg = leftLeg;
             console.log(leftLeg);
@@ -166,7 +178,9 @@ app.controller("MonsterCreateCtrl", function ($scope, $http) {
             rightLeg.set({
                 originX: 'left',
                 left: canvasElements.body.XY.br.x,
-                top: canvasElements.body.XY.br.y
+                top: canvasElements.body.XY.br.y,
+                height: 230,
+                width: 70
             });
             canvasElements.rightLeg = rightLeg;
             console.log(rightLeg);
@@ -178,6 +192,8 @@ app.controller("MonsterCreateCtrl", function ($scope, $http) {
         fabric.Image.fromURL(accessoryImage, function (oImg) {
             checkIfCanvasObjectExists(canvasElements.accessory)
             canvas.add(oImg.set({
+                height: 50,
+                width: 50
             }));
             canvasElements.accessory = oImg;
         });
@@ -209,7 +225,6 @@ app.controller("MonsterListCtrl", function ($scope, $http) {
     $scope.allMonsters = [];
     $scope.currentUserMonsters = [];
     $scope.runUserGet = false;
-    
     $http.get("api/MonsterList/Monsters/").success(function (response) {
         $scope.allMonsters = response;
         console.log(response)
@@ -244,8 +259,43 @@ app.controller("MonsterListCtrl", function ($scope, $http) {
         canvas.renderAll();
     };
 });
+
 app.controller("BattleCtrl", function ($scope, $http) {
+    console.log('hi');
     var p1Canvas = new fabric.Canvas('c1');
     var p2Canvas = new fabric.Canvas('c2');
+    $scope.currentUserMonsters = [];
+    $scope.allOtherMonsters = [];
+
+    $scope.drawToP1CanvasArea = (id) =>
+    {
+        let monster = $scope.allOtherMonsters[id];
+        console.log(monster);
+    };
+    $scope.drawToP2CanvasArea = (id) =>
+    {
+        let monster = $scope.allOtherMonsters[id];
+        console.log(monster);
+    };
+
+    console.log($('#makerId').val());
+
+    $http.get("http://localhost:49263/MyMonsters/api/MonsterList/User/" + $('#makerId').val()).success(function (response) {
+        $scope.currentUserMonsters = response;
+        console.log(response);
+        return $scope.currentUserMonsters;
+    }).error(function (error) {
+        console.log(error);
+    });
+
+    $http.get("http://localhost:49263/MyMonsters/api/MonsterList/Monsters/").success(function (response) {
+        $scope.allOtherMonsters = response;
+        console.log(response);
+        return $scope.allOtherMonsters;
+    }).error(function (error) {
+        console.log(error);
+    });
+
+
 });
 

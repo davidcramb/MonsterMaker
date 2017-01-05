@@ -191,6 +191,14 @@
     <Compile Include="Migrations\201612291937540_0.Designer.cs">
       <DependentUpon>201612291937540_0.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201701050101350_Seed1.cs" />
+    <Compile Include="Migrations\201701050101350_Seed1.Designer.cs">
+      <DependentUpon>201701050101350_Seed1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201701050115292_Seed2.cs" />
+    <Compile Include="Migrations\201701050115292_Seed2.Designer.cs">
+      <DependentUpon>201701050115292_Seed2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Arm.cs" />
     <Compile Include="Models\BattleLog.cs" />
@@ -312,6 +320,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201612291937540_0.resx">
       <DependentUpon>201612291937540_0.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701050101350_Seed1.resx">
+      <DependentUpon>201701050101350_Seed1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701050115292_Seed2.resx">
+      <DependentUpon>201701050115292_Seed2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

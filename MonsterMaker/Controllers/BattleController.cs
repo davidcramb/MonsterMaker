@@ -13,9 +13,11 @@ namespace MonsterMaker.Controllers
     public class BattleController : Controller
     {
         MonsterRepository repo = new MonsterRepository();
+
         // GET: Battle
-        public ActionResult Index()
+        public ActionResult BattleScreen()
         {
+
             return View();
         }
 

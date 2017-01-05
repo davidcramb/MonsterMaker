@@ -1,14 +1,56 @@
-﻿<div class="container">
+﻿
+<input type="hidden" id="makerId" value="@ViewBag.UserId" />
+<div class="container" ng-controller="BattleCtrl">
     <div class="row">
-        <div class="col-lg-5">
-            <canvas id="c1"></canvas>
+        <div class="col-lg-4">
+            <div class="dropdown">
+                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Select Your Monster
+                    <span class="carat"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" ng-repeat="userMonster in currentUserMonsters">
+                    {
+                        <li ng-click="drawToP1CanvasArea(userMonster.MonsterId)"><a href="#">{{userMonster.MonsterName}}</a></li>
+                    }
+                </ul>
+            </div>
         </div>
         <div class="col-lg-2">
             <div class="btn btn-danger disabled">Fight!</div>
         </div>
-        <div class="col-lg-5">
-            <canvas id="c2"></canvas>
+        <div class="col-lg-4">
+            <div class="dropdown">
+                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Select Another Monster
+                    <span class="carat"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" ng-repeat="monster in allOtherMonsters">
+                    {
+                    <li ng-click="drawToP2CanvasArea(monster.MonsterId)"><a href="#">{{monster.MonsterName}}</a></li>
+                    }
+                </ul>
+            </div>
         </div>
     </div>
-
 </div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-5">
+            <canvas id="c1" width="400" height="600"></canvas>
+        </div>
+        <div class="col-lg-2">
+            //////
+        </div>
+        <div class="col-lg-5">
+            <canvas id="c2" width="400" height="600"></canvas>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("https://rawgit.com/kangax/fabric.js/master/dist/fabric.js")
+    @Scripts.Render("~/bundles/app")
+
+}
