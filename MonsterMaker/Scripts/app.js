@@ -194,20 +194,25 @@ app.controller("MonsterListCtrl", function ($q, $scope, $http) {
     $scope.runUserGet = false;
     $scope.selected = { value: 0 };
 
-    $http.get("api/MonsterList/Monsters/").success(function (response) {
-        $scope.allMonsters = response;
-        console.log(response)
-        return $scope.allMonsters
-    }).error(function (error) {
-        console.log(error)
-    });
-    $http.get("api/MonsterList/User/" + $('#makerId').val()).success(function (response) {
-        $scope.currentUserMonsters = response;
-        console.log(response)
-        return $scope.currentUserMonsters
-    }).error(function (error) {
-        console.log(error)
-    });
+    $scope.populateLists = () => {
+        $http.get("api/MonsterList/Monsters/").success(function (response) {
+            $scope.allMonsters = response;
+            console.log(response)
+            return $scope.allMonsters
+        }).error(function (error) {
+            console.log(error)
+        });
+        $http.get("api/MonsterList/User/" + $('#makerId').val()).success(function (response) {
+            $scope.currentUserMonsters = response;
+            console.log(response)
+            return $scope.currentUserMonsters
+        }).error(function (error) {
+            console.log(error)
+        });
+    };
+    $scope.populateLists();
+
+
 
     $scope.viewUserMonster = (id) => {
         let monsters = $scope.allMonsters;
@@ -226,6 +231,7 @@ app.controller("MonsterListCtrl", function ($q, $scope, $http) {
         console.log('monsterid', id);
         $http.delete('api/MonsterList/Monsters/' + id).success(function (response) {
             console.log(response);
+            $scope.populateLists();
         }).error(function (error) {
             console.log(error);
         });
