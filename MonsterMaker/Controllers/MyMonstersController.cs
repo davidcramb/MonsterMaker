@@ -73,8 +73,11 @@ namespace MonsterMaker.Controllers
         }
 
         // GET: MyMonsters/Delete/5
+        [HttpDelete]
         public ActionResult Delete(int id)
         {
+            int x;
+            repo.DeleteMonsterByMonsterId(id);
             return View();
         }
 

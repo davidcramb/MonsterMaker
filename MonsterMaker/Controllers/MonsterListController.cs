@@ -28,7 +28,7 @@ namespace MonsterMaker.Controllers
 
             return Repo.GetMonstersByUserId(id);
         }
-        [Route("MyMonsters/api/MonsterList/monster/{id}")]
+        [Route("MyMonsters/api/MonsterList/Monster/{id}")]
         public Monster GetMonster(int id)
         {
             return Repo.GetMonsterByMonsterId(id);
@@ -40,9 +40,11 @@ namespace MonsterMaker.Controllers
         }
 
         // DELETE: api/MyMonsters/5
-        public void Delete(int monsterId)
+        [Route("MyMonsters/api/MonsterList/Monsters/{id}")]
+        public void Delete(int id)
         {
-            Repo.DeleteMonsterByMonsterId(monsterId);
+            int z;
+            Repo.DeleteMonsterByMonsterId(id);
         }
     }
 }

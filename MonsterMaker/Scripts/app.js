@@ -186,12 +186,14 @@ app.controller("MonsterCreateCtrl", function ($scope, $http) {
         });
     };
 });
-app.controller("MonsterListCtrl", function ($scope, $http) {
+app.controller("MonsterListCtrl", function ($q, $scope, $http) {
     var canvas = new fabric.StaticCanvas('c');
     var canvasElements = {};
     $scope.allMonsters = [];
     $scope.currentUserMonsters = [];
     $scope.runUserGet = false;
+    $scope.selected = { value: 0 };
+
     $http.get("api/MonsterList/Monsters/").success(function (response) {
         $scope.allMonsters = response;
         console.log(response)
@@ -219,11 +221,22 @@ app.controller("MonsterListCtrl", function ($scope, $http) {
         };
         drawMonsterToPage(canvasElements);
     };
+
+    $scope.deleteMonster = (id) => {
+        console.log('monsterid', id);
+        $http.delete('api/MonsterList/Monsters/' + id).success(function (response) {
+            console.log(response);
+        }).error(function (error) {
+            console.log(error);
+        });
+    };
+        
+    
     
     var drawMonsterToPage = (data) => {
-        canvas.loadFromJSON(data, canvas.renderAll.bind(canvas));
+            canvas.loadFromJSON(data, canvas.renderAll.bind(canvas));
 
-    };
+        };
 });
 
 app.controller("BattleCtrl", function ($scope, $http) {

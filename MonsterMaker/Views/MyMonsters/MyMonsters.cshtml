@@ -22,7 +22,7 @@
                     <td>{{userMonster.MonsterName}}</td>
                     <td>{{userMonster.MakerName.UserName}}</td>
                     <td class="btn btn-info viewMonster" ng-click="viewUserMonster(userMonster.MonsterId)">View</td>
-                    <td class="btn btn-danger">Delete</td>
+                    <td class="btn btn-danger" ng-click="deleteMonster(userMonster.MonsterId)">Delete</td><!--form submit for delete form needs to be uniqueoy named actionresult delete-->
                 </tbody>
             </table>
         </div>
