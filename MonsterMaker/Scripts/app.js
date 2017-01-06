@@ -151,6 +151,7 @@ app.controller("MonsterCreateCtrl", function ($scope, $http) {
                 width: 250,
                 height: 60
             });
+            rightArm.set('flipX', true);
             canvasElements.rightArm = rightArm;
             console.log(rightArm);
             canvas.add(rightArm);
@@ -272,10 +273,16 @@ app.controller("BattleCtrl", function ($scope, $http) {
     $scope.drawToP1CanvasArea = (id) =>
     {
         let monster = $scope.currentUserMonsters[id];
+        let data = monster.canvasData;
+        p1Canvas.loadFromJSON(data);
+        P1Canvas.renderAll();
     };
     $scope.drawToP2CanvasArea = (id) =>
     {
         let monster = $scope.allOtherMonsters[id];
+        let data = monster.canvasData;
+        p2Canvas.loadFromJSON(data);
+        P2Canvas.renderAll();
     };
 
 
