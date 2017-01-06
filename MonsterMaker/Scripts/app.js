@@ -1,24 +1,4 @@
 ﻿angular.module("fabric", [])
-//.factory('fabric', function ($window) {
-//    if ($window.moment) {
-//        $window._thirdParty = $window._thirdParty || {};
-//        $window._thirdParty.fabric = $window.fabric;
-//        try { delete $window.fabric; } catch (e) { $window.moment = undefined }
-//    }
-//    var fabric = $window._thirdParty.fabric;
-//    return fabric;
-//});
-
-
-//angular.module('app').factory('myBadService', [function () {
-//    try {
-//        fabric();
-//    }
-//    catch (e) {
-//        console.log('fabric is not available globally! Globals bad. ' +
-//          'You have to inject it');
-//    }
-//}]);
 
 
 var app = angular.module("MonsterMaker", ["fabric"]);
@@ -89,12 +69,6 @@ app.controller("MonsterCreateCtrl", function ($scope, $http) {
     $scope.DrawBody = (bodyImage) => {
         fabric.Image.fromURL(bodyImage, function (oImg) {
             checkIfCanvasObjectExists(canvasElements.body)
-            //canvas.add(oImg.set({
-            //    type: "body",
-            //    lockMovementX : true,
-            //    lockMovementY : true,
-            //    hasControls:false
-            //}));
             oImg.set({
                 lockMovementX: true,
                 lockMovementY: true,
@@ -106,11 +80,8 @@ app.controller("MonsterCreateCtrl", function ($scope, $http) {
             canvasElements.body = oImg;
             canvasElements.body.XY = canvasElements.body.calcCoords();
             console.log(oImg);
-            //var testcircleleft = new fabric.Circle({ radius: 10, top: 125, left: 200 }); //delete
-            //var testcircleright = new fabric.Circle({ radius: 10, top: 125, left: 400 }) //delete
             canvas.add(oImg);
         });
-        console.log(canvasElements.body)
     };
     $scope.DrawHead = (headImage) => {
         fabric.Image.fromURL(headImage, function (oImg) {
@@ -121,7 +92,6 @@ app.controller("MonsterCreateCtrl", function ($scope, $http) {
                 height: 200,
                 width: 150
             }));
-            console.log(oImg);
             canvasElements.head = oImg;
         });
     };
@@ -138,7 +108,6 @@ app.controller("MonsterCreateCtrl", function ($scope, $http) {
                 height: 60
             });
             canvasElements.leftArm = leftArm;
-            console.log(leftArm);
             canvas.add(leftArm);
         });
         fabric.Image.fromURL(armImage, function (oImg) {
@@ -153,7 +122,6 @@ app.controller("MonsterCreateCtrl", function ($scope, $http) {
             });
             rightArm.set('flipX', true);
             canvasElements.rightArm = rightArm;
-            console.log(rightArm);
             canvas.add(rightArm);
         });
     };
@@ -170,7 +138,6 @@ app.controller("MonsterCreateCtrl", function ($scope, $http) {
                 width: 70
             });
             canvasElements.leftLeg = leftLeg;
-            console.log(leftLeg);
             canvas.add(leftLeg);
         });
         fabric.Image.fromURL(legImage, function (oImg) {
@@ -184,7 +151,6 @@ app.controller("MonsterCreateCtrl", function ($scope, $http) {
                 width: 70
             });
             canvasElements.rightLeg = rightLeg;
-            console.log(rightLeg);
             canvas.add(rightLeg);
         });
 
@@ -221,7 +187,7 @@ app.controller("MonsterCreateCtrl", function ($scope, $http) {
     };
 });
 app.controller("MonsterListCtrl", function ($scope, $http) {
-    var canvas = new fabric.Canvas('c');
+    var canvas = new fabric.StaticCanvas('c');
     var canvasElements = {};
     $scope.allMonsters = [];
     $scope.currentUserMonsters = [];
@@ -253,11 +219,10 @@ app.controller("MonsterListCtrl", function ($scope, $http) {
         };
         drawMonsterToPage(canvasElements);
     };
-
+    
     var drawMonsterToPage = (data) => {
-        console.log("draw", data);
-        canvas.loadFromJSON(data);
-        canvas.renderAll();
+        canvas.loadFromJSON(data, canvas.renderAll.bind(canvas));
+
     };
 });
 
