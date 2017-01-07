@@ -244,10 +244,22 @@ app.controller("MonsterListCtrl", function ($q, $scope, $http) {
 app.controller("BattleCtrl", function ($scope, $http) {
     var currentUserId = $('#makerId').val();
     var p1Canvas = new fabric.StaticCanvas('c1');
-    $scope.p2Canvas = new fabric.StaticCanvas('c2');
+    var p2Canvas = new fabric.StaticCanvas('c2');
+    var p1Load = false;
+    var p2Load = false;
     $scope.selected = { value: 0 };
     $scope.currentUserMonsters = [];
     $scope.allOtherMonsters = [];
+    $scope.fightButton = $('#fightButton');
+
+    var checkIfBothMonstersLoaded = (p1, p2) => {
+        if (!p1 && !p2) {
+            return;
+        } else {
+            $scope.fightButton.removeClass('disabled');
+        }
+    }
+
     $scope.populateLists = () => {
         $http.get("http://localhost:49263/MyMonsters/api/MonsterList/User/" + currentUserId).success(function (response) {
             $scope.currentUserMonsters = response;
@@ -269,8 +281,9 @@ app.controller("BattleCtrl", function ($scope, $http) {
     {
         let monster = $scope.currentUserMonsters[id];
         let data = monster.canvasData;
-        console.log(p1Canvas);
         p1Canvas.loadFromJSON(data, p1Canvas.renderAll.bind(p1Canvas));
+        p1Load = true;
+        checkIfBothMonstersLoaded(p1Load, p2Load);
     };
     $scope.drawToP2CanvasArea = (id) =>
     {
@@ -280,9 +293,10 @@ app.controller("BattleCtrl", function ($scope, $http) {
         data.objects.forEach(function (o) {
             o.flipX = true;
         })
-        $scope.p2Canvas.loadFromJSON(data, $scope.p2Canvas.renderAll.bind($scope.p2Canvas));
-        console.log($scope.p2Canvas.getObjects());
-        $scope.p2Canvas.renderAll();
+        p2Canvas.loadFromJSON(data, p2Canvas.renderAll.bind(p2Canvas));
+        p2Canvas.renderAll();
+        p2Load = true;
+        checkIfBothMonstersLoaded(p1Load, p2Load);
     };
     $scope.populateLists();
 });
