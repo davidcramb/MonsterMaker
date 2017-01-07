@@ -33,17 +33,22 @@
         </div>
     </div>
 </div>
+@*end of container*@
 
 <div class="container">
     <div class="row">
-        <div class="col-lg-5">
-            <canvas id="c1" width="400" height="600"></canvas>
+        <div class="col-lg-5 canvas-container">
+        <canvas id="c1" width="400" height="600"></canvas>
+                <meter class="healthMeter" id="p1Health" max="100" min="0" high="100" low="25" value="100"></meter>
+                <div class="battle-indicator" id="p1Indicator"></div>
         </div>
+
         <div class="col-lg-2">
-            //////
         </div>
-        <div class="col-lg-5">
+        <div class="col-lg-5 canvas-container">
             <canvas id="c2" width="400" height="600"></canvas>
+                <meter class="healthMeter" id="p2Health" max="100" min="0" high="100" low="25" value="100"></meter>
+                <div class="battle-indicator" id="p2Indicator"></div>
         </div>
     </div>
 </div>

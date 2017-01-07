@@ -1,0 +1,29 @@
+﻿.canvas-container {
+    position: relative;
+    display: flex;
+    width: 400px;
+    height: 600px;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+
+
+.healthMeter {
+    position: absolute;
+    order: 2;
+    width: 300px;
+    height: 30px;
+    
+}
+.battle-indicator {
+    order: 1;
+    width: 500px;
+    border-radius: 50%;
+    border-color: red;
+    background: red;
+    margin: auto;
+    
+}
+
