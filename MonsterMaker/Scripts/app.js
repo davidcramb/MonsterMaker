@@ -236,56 +236,53 @@ app.controller("MonsterListCtrl", function ($q, $scope, $http) {
             console.log(error);
         });
     };
-        
-    
     
     var drawMonsterToPage = (data) => {
             canvas.loadFromJSON(data, canvas.renderAll.bind(canvas));
-
         };
 });
-
 app.controller("BattleCtrl", function ($scope, $http) {
-    var currentUserId = $('#makerId').val()
-    var p1Canvas = new fabric.Canvas('c1');
-    var p2Canvas = new fabric.Canvas('c2');
+    var currentUserId = $('#makerId').val();
+    var p1Canvas = new fabric.StaticCanvas('c1');
+    $scope.p2Canvas = new fabric.StaticCanvas('c2');
     $scope.selected = { value: 0 };
-
     $scope.currentUserMonsters = [];
     $scope.allOtherMonsters = [];
+    $scope.populateLists = () => {
+        $http.get("http://localhost:49263/MyMonsters/api/MonsterList/User/" + currentUserId).success(function (response) {
+            $scope.currentUserMonsters = response;
+            console.log(response);
+            return $scope.currentUserMonsters;
+        }).error(function (error) {
+            console.log(error);
+        });
+        $http.get("http://localhost:49263/MyMonsters/api/MonsterList/Monsters/").success(function (response) {
+            console.log(response);
+            $scope.allOtherMonsters = response;
+            return $scope.allOtherMonsters;
+        }).error(function (error) {
+            console.log(error);
+        });
+    };
 
     $scope.drawToP1CanvasArea = (id) =>
     {
         let monster = $scope.currentUserMonsters[id];
         let data = monster.canvasData;
-        p1Canvas.loadFromJSON(data);
-        P1Canvas.renderAll();
+        console.log(p1Canvas);
+        p1Canvas.loadFromJSON(data, p1Canvas.renderAll.bind(p1Canvas));
     };
     $scope.drawToP2CanvasArea = (id) =>
     {
+        let p2Group = new fabric.Group();
         let monster = $scope.allOtherMonsters[id];
-        let data = monster.canvasData;
-        p2Canvas.loadFromJSON(data);
-        P2Canvas.renderAll();
+        let data = angular.fromJson(monster.canvasData);
+        data.objects.forEach(function (o) {
+            o.flipX = true;
+        })
+        $scope.p2Canvas.loadFromJSON(data, $scope.p2Canvas.renderAll.bind($scope.p2Canvas));
+        console.log($scope.p2Canvas.getObjects());
+        $scope.p2Canvas.renderAll();
     };
-
-
-    $http.get("http://localhost:49263/MyMonsters/api/MonsterList/User/" + currentUserId).success(function (response) {
-        $scope.currentUserMonsters = response;
-        console.log(response);
-        return $scope.currentUserMonsters;
-    }).error(function (error) {
-        console.log(error);
-    });
-
-    $http.get("http://localhost:49263/MyMonsters/api/MonsterList/Monsters/").success(function (response) {
-        console.log(response);
-        $scope.allOtherMonsters = response;
-        return $scope.allOtherMonsters;
-    }).error(function (error) {
-        console.log(error);
-    });
-
-
+    $scope.populateLists();
 });
-
