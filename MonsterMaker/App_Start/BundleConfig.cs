@@ -25,8 +25,14 @@ namespace MonsterMaker
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/battle.css",
+                      "~/Content/navbar.css",
                       "~/Content/site.css"));
+            bundles.Add(new StyleBundle("~/Content/css-battle").Include(
+                      "~/Content/battle.css"));
+            bundles.Add(new StyleBundle("~/Content/css-main").Include(
+                       "~/Content/main.css"));
+            bundles.Add(new StyleBundle("~/Content/css-mymonsters").Include(
+                       "~/Content/mymonsters.css"));
             bundles.Add(new ScriptBundle("~/bundles/app").Include(
                       "~/Scripts/angular.js",
                       "~/Scripts/app.js"));

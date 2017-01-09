@@ -1,12 +1,33 @@
 ﻿@{
+    if (ViewContext.HttpContext.User.Identity.IsAuthenticated)
+    {
+        ViewBag.IsAuthed = true;
+    }
+}
+@section AddInHead{
+    <link href="@Url.Content("~/Content/main.css")" rel="stylesheet" type="text/css" />
 }
 
-<div class="jumbotron vertical-center splash">
-    <div class="container">
-        <img src="http://localhost:49263/images/banner-front-page.png" />
-        <div class="center-block"><button type="button" class="btn btn-info btn-xl" name="join" id="button-join">Join Now!</button></div>
+
+        @if (!User.Identity.IsAuthenticated)
+        {
+            <div class="jumbotron vertical-center splash menu-container">
+                <div class="container">
+                    <h1 id="welcome">Monster Maker</h1>
+                    <div type="button" class="btn btn-info btn-lg" name="join" id="button-join">Join Now!</div>
+                </div>
+            </div>
+        }
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="jumbotron vertical-center splash menu-container">
+        <div class="container">
+            <h1 id="welcome">Monster Maker</h1>
+            <a href="http://localhost:49263/Create/Create" class="menu"><div type="button" class="btn btn-danger btn-lg menu" name="join" id="button-create">Create A Monster!</div></a>
+            <a href="http://localhost:49263/MyMonsters/MyMonsters" class="menu"><div type="button" class="btn btn-danger btn-lg menu" name="mymonsters" id="button-mymonsters">View Monsters</div></a>
+        </div>
     </div>
-</div>
+}
 
 <div class="row">
     Monster images are copyright Jeff Weigel and used for demonstration purposes only. The author of this application assumes no ownership of his art.

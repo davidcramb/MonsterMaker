@@ -1,0 +1,26 @@
+﻿body {
+    background-color: #BD6B4A
+}
+nav {
+    font-family: 'Gloria Hallelujah', cursive;
+    background-color: #64367E;
+
+}
+
+
+.navbar .nav > li > a, .navbar .nav > li {
+    color:          #86A0B6;
+    font-size: 1.15em;
+    text-shadow:    1px;
+}
+ul.nav a:hover { 
+    background-color: orange !important; 
+    color: white;
+}
+
+
+.navbar-nav li{
+    text-align: center;
+    margin-left: 1em;
+    margin-right: 1em;
+}

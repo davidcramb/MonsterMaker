@@ -181,6 +181,7 @@ app.controller("MonsterCreateCtrl", function ($scope, $http) {
         console.log(monster);
         $http.post("/MonsterDetail/Monsters", monster).success(function (response) {
             console.log(response)
+            alert("Monster Saved!");
         }).error(function (error) {
             console.log(error)
         });
